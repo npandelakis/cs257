@@ -1,28 +1,53 @@
 '''
-    book.py
-    Ross Grogan-Kaylor and Nick Pandelakis
-    January 2021
-
-    Examples:
-    python3 bookinfo.py -b substring # prints list of books whose titles contain substring
-    python3 bookinfo.py -a substring # prints list of authors whose names contain substring, and all books by each such author
-    python3 bookinfo.py year1 year2 # prints list of books published between min(year1, year2) and max(year1, year2)
-
-    General:
-    python3 bookinfo1.py [bookinfo2.py ... bookinfon.py] [-b substring] [-a substring] [year1 year2]
-
+python3 bookinfo.py -b substring # prints list of books whose titles contain substring
+python3 bookinfo.py -a substring # prints list of authors whose names contain substring, and all books by each such author
+python3 bookinfo.py year1 year2 # prints list of books published between min(year1, year2) and max(year1, year2)
 '''
 
+import csv
 import argparse
 
-def get_parsed_arguments():
-    parser = argparse.ArgumentParser(description='Prints various lists of books which satisfy given conditions from a given .csv file.')
-    parser.add_argument('bookcsvs', metavar='bookcsv', nargs='+', help='one or more csv files of books to be searched through')
-    parser.add_argument('--books', '-b', default='english', help='Specify to only return books whose titles contain the given string')
-    parser.add_argument('--authors', '-a', default='english', help='Specify to only return authors whose names contain the given string, as well as the books they wrote')
+# Interesting: "-b", "--book" vs. "b, --book": "-b", "--book" is the one you want (treats -b and --book as referring to the
+# same argument); "-b, --book" treats -b and --book as referring to the same argument, but where -b can be specified with no args
+
+def main():
+    # Set up command line arguments.
+    with open("prolog.txt", "r") as prolog, open("epilog.txt", "r") as epilog:
+        parser = argparse.ArgumentParser(description = prolog.read(), epilog = epilog.read())
+
+    parser.add_argument("books-csv", help = "The .csv file storing the table of books and authors.")
+    parser.add_argument("-b", "--book", nargs="+", help="One or more substrings to search for in the titles of books. "
+                                                        "If one of the substrings contains a space, surround that substring"
+                                                        " with quotes \"\".")
+    parser.add_argument("-a", "--author", nargs="+",
+                        help="One or more substrings to search for in the names of authors. If one of the substrings contains "
+                             "a space, surround that substring with quotes \"\".")
+    parser.add_argument("year1", nargs = "?", help="One of the years in the time "
+                                                                 "interval [min(year1, year2), max(year1, year2)] "
+                                                                 "within which to search for books.")
+    parser.add_argument("year2", nargs = "?", help="One of the years in the time "
+                                                                 "interval [min(year1, year2), max(year1, year2)] "
+                                                                 "within which to search for books.")
+    # Parse the command line.
     parsed_arguments = parser.parse_args()
-    return parsed_arguments
+
+    # Handle the years.
+    year1 = parsed_arguments.year1
+    if parsed_arguments.year2 is None:
+        year2 = year1
+
+    # Note that year1 or year2 might still be None.
 
 
-if __name__ == '__main__':
-    main()
+
+
+    print(parsed_arguments)
+
+    # Read from CSV.
+    # This code was taken from the first example in https://docs.python.org/3/library/csv.html#examples.
+    # with open('books.csv', newline='') as f:
+    #     reader = csv.reader(f)
+    #     for row in reader:
+    #         print(row)
+
+main()
