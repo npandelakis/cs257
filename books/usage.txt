@@ -1,0 +1,19 @@
+// Written by Ross Grogan-Kaylor and Nick Pandelakis for cs257
+usage: books.py [-h] [-b BOOKS [BOOKS ...]] [-a AUTHORS [AUTHORS ...]] bookscsv [year1] [year2]
+
+Tool for searching for books written by specified authors during a time period. During the time interval [min(year1, year2), max(year1, year2)] (this interval is assumed to be "all time" if unspecified), this command considers authors whose names contain the substring specified by --author or -a (if no substring
+is specified, all relevant authors are searched), and then finds the books whose titles contain the substring specified by --books or -b that were written by these authors (if no substring is specified, all relevant books are considered).
+
+positional arguments:
+  bookscsv              The .csv file storing the table of books and authors.
+  year1                 One of the years in the time interval [min(year1, year2), max(year1, year2)] within which to search for books.
+  year2                 One of the years in the time interval [min(year1, year2), max(year1, year2)] within which to search for books.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BOOKS [BOOKS ...], --books BOOKS [BOOKS ...]
+                        One or more substrings to search for in the titles of books. If one of the substrings contains a space, surround that substring with quotes "".
+  -a AUTHORS [AUTHORS ...], --authors AUTHORS [AUTHORS ...]
+                        One or more substrings to search for in the names of authors. If one of the substrings contains a space, surround that substring with quotes "".
+
+Any specification of arguments is allowed. That is, one may specify only books, only authors, only years, only books and authors, only books and years, only authors and years, all of books, authors, and years, or none at all. Specifying only one year Y is the same as specifying year1 = year2 = Y.
