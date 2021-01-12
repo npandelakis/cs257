@@ -9,7 +9,7 @@ positional arguments:
   year1					A beginning year to search by.
   year2					An end year to search by. 
 
-optional argumentsL
+optional arguments
   -h, --help				Show this help message and exit.
   --books SUBSTRING, -b SUBSTRING	Search only books whose titles contain the substring.
   --authors SUBSTRING, -a SUBSTRING     Search only authors whose names contain the substring.	  
