@@ -1,5 +1,5 @@
 Any specification of arguments is allowed. That is, one may specify only books, only authors, only years, only books
-and authors, only books and years, only authors and years, or nothing.
+and authors, only books and years, only authors and years, all of books, authors, and years, or none at all.
 
 Specifying only one year Y is the same as specifying year1 = year2 = Y.
 
