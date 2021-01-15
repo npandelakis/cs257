@@ -1,10 +1,7 @@
 '''
 books.py
 Written by Ross Grogan-Kaylor and Nick Pandelakis for cs257
-
-python3 bookinfo.py -b substring # prints list of books whose titles contain substring
-python3 bookinfo.py -a substring # prints list of authors whose names contain substring, and all books by each such author
-python3 bookinfo.py year1 year2 # prints list of books published between min(year1, year2) and max(year1, year2)
+A command line interface for searching the 'books.csv' file.
 '''
 
 import csv
@@ -18,7 +15,6 @@ def get_parsed_arguments():
     with open("prolog.txt", "r") as prolog, open("epilog.txt", "r") as epilog:
         parser = argparse.ArgumentParser(description = prolog.read(), epilog = epilog.read())
 
-    parser.add_argument("bookscsv", metavar="bookscsv", help = "The .csv file storing the table of books and authors.")
     parser.add_argument("-b", "--books", nargs="+", help="One or more substrings to search for in the titles of books. "
                                                         "If one of the substrings contains a space, surround that substring"
                                                         " with quotes \"\".")
@@ -41,44 +37,48 @@ def get_parsed_arguments():
         parsed_arguments.year2 = year1
 
     # Note that year1 or year2 might still be None.
-    print(parsed_arguments)
     return parsed_arguments 
 
 
-
-    # Read from CSV.
-    # This code was taken from the first example in https://docs.python.org/3/library/csv.html#examples.
-    # with open('books.csv', newline='') as f:
-    #     reader = csv.reader(f)
-    #     for row in reader:
-    #         print(row)
+def filterBooks(filtered, books) -> list:
+    return list(filter(lambda p: any(sub.lower() in p[0].lower() for sub in books), filtered))
 
 
+def filterAuthors(filtered, authors) -> list:
+    return list(filter(lambda p: any(sub.lower() in p[2].lower() for sub in authors), filtered))
+
+
+def filterYears(filtered, year1, year2) -> list:
+    return list(filter(lambda p: year1 <= p[1] and year2 >= p[1], filtered))
+
+
+def getAuthorSet(filtered, authors) -> set:
+    authset = set()
+
+    if authors:
+        for row in filtered:
+            authset.add(row[2])
+    
+    return authset
 
 
 
 def main():
     arguments = get_parsed_arguments()
-    filtered = csv.reader(open(arguments.bookscsv, 'r'))
-    authlist = set()
+    filtered  = csv.reader(open('books.csv', 'r'))
 
 
-    # Save filtered as lists because the filter object can only be iterated over once.
     if arguments.year1:
-        filtered = list(filter(lambda p: arguments.year1 <= p[1] and arguments.year2 >= p[1], filtered))
-
+        filtered = filterYears(filtered, arguments.year1, arguments.year2)
     if arguments.books:
-        filtered = list(filter(lambda p: any(sub.lower() in p[0].lower() for sub in arguments.books), filtered))
-
+        filtered = filterBooks(filtered, arguments.books)
     if arguments.authors:
-        filtered = list(filter(lambda p: any(sub.lower() in p[2].lower() for sub in arguments.authors), filtered))
-        for row in filtered:
-            authlist.add(row[2])
-        authlist = sorted(authlist)
+        filtered = filterAuthors(filtered, arguments.authors)
 
+    authset = getAuthorSet(filtered, arguments.authors)
     
-    if authlist != set():
-        for auth in authlist:
+    if authset != set():
+        for auth in authset:
             print(auth)
             for row in list(filtered):
                 if row[2] == auth:
