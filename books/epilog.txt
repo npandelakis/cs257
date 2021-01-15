@@ -1,5 +1,7 @@
 Any specification of arguments is allowed. That is, one may specify only books, only authors, only years, only books
 and authors, only books and years, only authors and years, all of books, authors, and years, or none at all.
 
+HOWEVER, if any years are specified, the years arguments, which are positional, must come before any of the other arguments, which are optional.
+
 Specifying only one year Y is the same as specifying year1 = year2 = Y.
 
