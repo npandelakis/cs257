@@ -1,6 +1,6 @@
-Tool for searching for books written by specified authors during a time period.
+Tool for searching for books in the 'books.csv' file written by specified authors during a time period.
 
 During the time interval [min(year1, year2), max(year1, year2)] (this interval is assumed to be "all time" if unspecified),
-this command considers authors whose names contain the substring specified by --author or -a (if no substring is specified,
-all relevant authors are searched), and then finds the books whose titles contain the substring specified by --books or -b
+this command considers authors whose names contain (one of) the substring(s) specified by --author or -a (if no substring is specified,
+all relevant authors are searched), and then finds the books whose titles contain (one of) the substring(s) specified by --books or -b
 that were written by these authors (if no substring is specified, all relevant books are considered).
