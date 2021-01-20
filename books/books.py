@@ -1,6 +1,7 @@
 '''
 books.py
 Written by Ross Grogan-Kaylor and Nick Pandelakis for cs257
+Revised by Nick Pandelakis for 1/22
 A command line interface for searching the 'books.csv' file.
 '''
 
@@ -40,52 +41,57 @@ def get_parsed_arguments():
     return parsed_arguments 
 
 
-def filterBooks(filtered, books) -> list:
-    return list(filter(lambda p: any(sub.lower() in p[0].lower() for sub in books), filtered))
+def filter_books(filtered, books) -> list:
+    title_index = 0
+    return list(filter(lambda p: any(sub.lower() in p[title_index].lower() for sub in books), filtered))
 
 
-def filterAuthors(filtered, authors) -> list:
-    return list(filter(lambda p: any(sub.lower() in p[2].lower() for sub in authors), filtered))
+def filter_authors(filtered, authors) -> list: 
+    author_index = 2
+    return list(filter(lambda p: any(sub.lower() in p[author_index].lower() for sub in authors), filtered))
 
 
-def filterYears(filtered, year1, year2) -> list:
-    return list(filter(lambda p: year1 <= p[1] and year2 >= p[1], filtered))
+def filter_years(filtered, year1, year2) -> list:
+    year_index = 1
+    return list(filter(lambda p: year1 <= p[year_index] and year2 >= p[year_index], filtered))
 
 
-def getAuthorSet(filtered, authors) -> set:
-    authset = set()
+def get_authorset(filtered, authors) -> set:
+    authorset = set()
 
     if authors:
         for row in filtered:
-            authset.add(row[2])
+            authorset.add(row[2])
     
-    return authset
+    return authorset
 
 
 
 def main():
     arguments = get_parsed_arguments()
     filtered  = csv.reader(open('books.csv', 'r'))
-
+    title_index = 0
+    year_index = 1
+    author_index = 2 
 
     if arguments.year1:
-        filtered = filterYears(filtered, arguments.year1, arguments.year2)
+        filtered = filter_years(filtered, arguments.year1, arguments.year2)
     if arguments.books:
-        filtered = filterBooks(filtered, arguments.books)
+        filtered = filter_books(filtered, arguments.books)
     if arguments.authors:
-        filtered = filterAuthors(filtered, arguments.authors)
+        filtered = filter_authors(filtered, arguments.authors)
 
-    authset = getAuthorSet(filtered, arguments.authors)
+    authorset = get_authorset(filtered, arguments.authors)
     
-    if authset != set():
-        for auth in authset:
-            print(auth)
+    if authorset != set():
+        for author in authorset:
+            print(author)
             for row in list(filtered):
-                if row[2] == auth:
-                    print('    ' + row[0] + ', ' + row[1])
+                if row[author_index] == author:
+                    print('    ' + row[title_index] + ', ' + row[year_index])
     else:
         for row in filtered:
-            print(row[0] + ', ' + row[1] + ', ' + row[2])
+            print(row[title_index] + ', ' + row[year_index] + ', ' + row[author_index])
 
 if __name__ == '__main__':
     main()
