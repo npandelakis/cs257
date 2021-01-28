@@ -13,6 +13,7 @@ def create_athletes_csv(reader_list):
     name_index = 1 
     i = 1
     for row in reader_list[1:]:
+        # Add athletes by index to csv, ignore potentially different spellings after the athlete has been added
         if i == int(row[0]):
             writer.writerow([i, row[name_index]])
             i = i + 1
@@ -20,49 +21,33 @@ def create_athletes_csv(reader_list):
 
 def create_sports_csv(reader_list):
     writer = csv.writer(open('sports.csv','w'))
-    sport_dict = {}
     sport_index = 12
-    i = 1
-    for row in reader_list[1:]:
-        if row[sport_index] not in sport_dict:
-            sport_dict[row[sport_index]] = i
-            i = i + 1
+    sport_dict = create_id_dict(reader_list, sport_index)
+
     for key in sport_dict:
         writer.writerow([sport_dict[key], key])
     
 def create_events_csv(reader_list):
     writer = csv.writer(open('events.csv','w'))
-    event_dict = {}
     event_index = 13
-    i = 1
-    for row in reader_list[1:]:
-        if row[event_index] not in event_dict:
-            event_dict[row[event_index]] = i
-            i = i + 1
+    event_dict = create_id_dict(reader_list, event_index)
+
     for key in event_dict:
         writer.writerow([event_dict[key], key])
 
 def create_teams_csv(reader_list):
     writer = csv.writer(open('teams.csv','w'))
-    team_dict = {}
     team_index = 6
-    i = 1
-    for row in reader_list[1:]:
-        if row[team_index] not in team_dict:
-            team_dict[row[team_index]] = i
-            i = i + 1
+    team_dict = create_id_dict(reader_list, team_index)
+
     for key in team_dict:
         writer.writerow([team_dict[key], key])
 
 def create_nocs_csv(reader_list): 
     writer = csv.writer(open('nocs.csv','w'))
-    noc_dict = {}
     noc_index = 7
-    i = 1
-    for row in reader_list[1:]:
-        if row[noc_index] not in noc_dict:
-            noc_dict[row[noc_index]] = i
-            i = i + 1
+    noc_dict = create_id_dict(reader_list, noc_index)
+
     for key in noc_dict:
         writer.writerow([noc_dict[key], key])
    
@@ -145,11 +130,26 @@ def create_results_csv(reader_list):
         i = i + 1
 
 def get_id_dict(reader_list):
+    '''
+    get dictionary from linking table csv files
+    '''
     id_dict = {}
     for row in reader_list:
         id_dict[row[1]] = row[0]
     return id_dict
 
+def create_id_dict(reader_list, index):
+    '''
+    create dictionary for the creation of linking csv files
+    '''
+    id_dict = {}
+    i = 1
+    for row in reader_list[1:]:
+        if row[index] not in id_dict:
+            id_dict[row[index]] = i
+            i = i + 1
+    
+    return id_dict
 
 
 
