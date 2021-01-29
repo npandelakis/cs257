@@ -29,6 +29,9 @@ def get_parsed_arguments():
     parsed_arguments = parser.parse_args()
     return parsed_arguments
 
+
+################# Query functions ######################
+
 def query_noc_athletes(noc, cursor):
     try:
         query_string = noc 
@@ -58,17 +61,9 @@ def query_year_medalists(year, cursor):
         print(e)
         exit()
 
+########################################################
 
-
-
-
-
-
-
-
-
-
-
+################# Print Functions ######################
 
 def print_noc_athletes(noc, cursor):
     print('===== All Athletes from ' + noc + ' =====')
@@ -87,6 +82,8 @@ def print_year_medalists(year, cursor):
     for row in cursor:
         print(row[0] + ',' + row[1] + ',' + row[2])
     print()
+
+########################################################
 
 def main():
     arguments = get_parsed_arguments()
