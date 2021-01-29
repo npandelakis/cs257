@@ -20,11 +20,14 @@ def get_parsed_arguments():
     '''Obtains and parses the command line arguments'''
     parser = argparse.ArgumentParser()
     
-    parser.add_argument("-n", "--noc", help="A 3-letter NOC's to list the athletes for")
+    parser.add_argument("-n", "--noc", help="A 3-letter NOC to list the athletes for")
 
-    parser.add_argument("-l", "--list", action = 'store_true', help="List the number of gold medals won by each NOC in descending order")
+    parser.add_argument("-l", "--list", action = 'store_true', help="Lists the number of gold medals won by each NOC in descending order")
 
     parser.add_argument("-y", "--year", help="Lists all athletes who won a medal for a given year, including what event they won their medal in and the type of medal won.")
+
+    parser.add_argument('-v','--version', action='version', version='olympics.py 1.0')
+
 
     parsed_arguments = parser.parse_args()
     return parsed_arguments
