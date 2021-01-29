@@ -1,3 +1,4 @@
+-- Designed by Nick Pandelakis
 CREATE TABLE athletes (
     id SERIAL,
     athlete_name text
