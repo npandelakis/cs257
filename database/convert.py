@@ -45,11 +45,18 @@ def create_teams_csv(reader_list):
 
 def create_nocs_csv(reader_list): 
     writer = csv.writer(open('nocs.csv','w'))
-    noc_index = 7
-    noc_dict = create_id_dict(reader_list, noc_index)
+    noc_dict = {}
+    noc_index = 0
+    region_index = 1
+    i = 1
+
+    for row in reader_list[1:]:
+        if row[noc_index] not in noc_dict:
+            noc_dict[row[noc_index]] = [i, row[region_index]]
+            i = i + 1
 
     for key in noc_dict:
-        writer.writerow([noc_dict[key], key])
+        writer.writerow([noc_dict[key][0], key, noc_dict[key][1]])
    
 def create_games_csv(reader_list):
     writer = csv.writer(open('games.csv','w'))
@@ -154,15 +161,16 @@ def create_id_dict(reader_list, index):
 
 
 def main():
-    reader_list = list(csv.reader(open('athlete_events.csv', 'r')))
-    create_athletes_csv(reader_list)
-    create_sports_csv(reader_list)
-    create_events_csv(reader_list)
-    create_teams_csv(reader_list)
-    create_nocs_csv(reader_list)
-    create_games_csv(reader_list)
-    create_athlete_stats_csv(reader_list)
-    create_results_csv(reader_list)
+    athlete_results_list = list(csv.reader(open('athlete_events.csv', 'r')))
+    noc_regions_list = list(csv.reader(open('noc_regions.csv','r')))
+    create_athletes_csv(athlete_results_list)
+    create_sports_csv(athlete_results_list)
+    create_events_csv(athlete_results_list)
+    create_teams_csv(athlete_results_list)
+    create_nocs_csv(noc_regions_list)
+    create_games_csv(athlete_results_list)
+    create_athlete_stats_csv(athlete_results_list)
+    create_results_csv(athlete_results_list)
 
 if __name__ == '__main__':
     main()

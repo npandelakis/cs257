@@ -26,7 +26,8 @@ CREATE TABLE games (
 
 CREATE TABLE nocs (
     id SERIAL,
-    noc text
+    noc text,
+	noc_region text
 );
 
 CREATE TABLE results (
