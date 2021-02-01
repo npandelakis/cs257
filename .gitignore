@@ -131,3 +131,4 @@ dmypy.json
 
 #congif file
 olympics/config.py
+olympics-api/config.py
