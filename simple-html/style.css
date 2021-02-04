@@ -1,0 +1,55 @@
+/*Written by Nick Pandelakis*/
+
+
+body {
+	margin: 20px 20px 20px 20px;
+}
+
+
+#sections {
+	height: 100%;
+	width: 100%;
+}
+
+#top-bar {
+	width: 100%;
+	height: 20%;
+	float: left;
+	margin-bottom: 2%;
+	background-color: LightCoral;
+}
+
+#side-bar {
+	width: 15%;
+	height: 75%;
+	float: left;
+	margin-right: 2%;
+	background-color: DarkSeaGreen;
+}
+
+#body {
+	width: 83%;
+	height: 75%;
+	float: left;
+	background-color: CornFlowerBlue;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
