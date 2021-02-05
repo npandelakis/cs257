@@ -1,10 +1,15 @@
 /*Written by Nick Pandelakis*/
 
-
-body {
-	margin: 20px 20px 20px 20px;
+html {
+	height: 100%;
+	margin: 0;
 }
 
+body {
+	height: 95%;
+	margin: 20px;	
+	overflow: hidden;
+}
 
 #sections {
 	height: 100%;
