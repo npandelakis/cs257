@@ -1,1 +1,42 @@
 //Nick Pandelakis and Grace de Benedetti
+
+STORY: A person interested in terrorism stats could get data about terrorist
+attacks in the world to help understand where terrorism is most prevalent in
+the world.
+
+IMPLEMENTATION: We could have a world map, and the
+user could hover over a country to get quick summary data about the country and
+terrorism in that country, or click on a country to zoom into that country
+to get more specific data.
+
+STORY: A person interested in terrorism stats could get data about terrorist
+attacks in a country to help understand where terrorism is most prevalent in
+that country.
+
+IMPLEMENTATION: We could have a country map, and the user could hover over
+regions to get quick summary data, or click on a region to zoom into that region
+to get more specific data.
+
+STORY: A person interested in terrorism stats could get data about terrorist
+attacks in a region as well as statistics about these attacks to help understand
+more about attacks in a region.
+
+IMPLEMENTATION: We could have a map of the region, and the user could
+hover over an area in the region (provstate in dataset) to get quick summary
+data, or click on an area to get statistics and zoom into a page with pins for
+individual terrorist attacks.
+
+STORY: A person interested in terrorism stats could get data about a specific
+terrorist attack to help understand more about specific attacks.
+
+IMPLEMENTATION: We could have a map of the area (provstate in dataset), and the
+user could hover over a pin in the area to get quick summary data about the
+terrorist attack, or click on an pin to get more information about the attack.
+
+STORY: A person interested in terrorism can search for specific countries or
+regions to learn more about terrorism in the specified category.
+(this one we're not sure about yet)
+
+IMPLEMENTATION: There will be a search bar at the top of the page where users
+can input their search string and the page will output a map with statistics
+about terrorism in the specified category.
