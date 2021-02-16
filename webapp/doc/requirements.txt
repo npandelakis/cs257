@@ -1,29 +1,36 @@
 //Nick Pandelakis and Grace de Benedetti
 
-STORY: A person interested in terrorism stats could get data about terrorist
+STORY: A person interested in terrorism stats wants to get data about terrorist
 attacks in the world to help understand where terrorism is most prevalent in
 the world.
 
-IMPLEMENTATION: We could have a world map, and the
+IMPLEMENTATION: We would have a world terror heat map, and the
 user could hover over a country to get quick summary data about the country and
 terrorism in that country, or click on a country to zoom into that country
 to get more specific data.
 
-STORY: A person interested in terrorism stats could get data about terrorist
-attacks in a country to help understand where terrorism is most prevalent in
+STORY: A person interested in terrorism stats wants to get data about terrorist
+attacks in a specific country to help understand where terrorism is most prevalent in
 that country.
 
-IMPLEMENTATION: We could have a country map, and the user could hover over
+IMPLEMENTATION: We could have a country terror heat map, and the user could hover over
 areas to get quick summary data, or click on an area to zoom into that area
 to get a map with pins for each attack and more specific data.
 
 STORY: A person interested in terrorism stats could get data about a specific
 terrorist attack to help understand more about specific attacks.
 
+IMPLEMENTATION: This person could find the pin or search for the country where this
+Specific attack occurred. Clicking on the pin would take them to a page that had all
+of the relevant information for that attack.
+
+STORY: A person interested in terrorism stats want to see where exactly terrorist
+Attacks occurred in a specific province/region.
+
 IMPLEMENTATION: We could have a map of the area (provstate in dataset), and the
-user could hover over a pin in the area to get quick summary data about the
-terrorist attack, or click on an pin to get more information and statistics
-about the attack.
+user could hover over a pin in the area that corresponds to the gps location of
+the attack to get quick summary data about the terrorist attack, or click on the
+pin to get more information and statistics about the attack.
 
 STORY: A person interested in terrorism can search for specific countries or
 regions to learn more about terrorism in the specified category.
@@ -32,3 +39,10 @@ regions to learn more about terrorism in the specified category.
 IMPLEMENTATION: There will be a search bar at the top of the page where users
 can input their search string and the page will output a map with statistics
 about terrorism in the specified category.
+
+STORY: At any level of depth, a person interested in terrorism might want to filter
+terror attacks.
+
+IMPLEMENTATION:
+At each page that contains a map, there will be a box that allows the user to filter
+out results she doesn't want to see.
