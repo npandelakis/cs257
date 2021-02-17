@@ -65,7 +65,7 @@ RESPONSE: A JSON list of dictionaries, each of which represents one of the areas
 that contains the search_text, sorted alphabetically. Each area dictionary will
 have the following fields.
     name -- (string) the name of the area
-    terrorist attacks -- (string) the total number of terrorist attacks in that
+    terrorist attacks -- (integer) the total number of terrorist attacks in that
     area in the given year
     eventid -- (integer) an id representing a single instance of a terrorist
     attack in the given area in the given year
