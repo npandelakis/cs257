@@ -1,0 +1,74 @@
+Grace de Benedetti and Nick Pandelakis
+A list of REQUEST and RESPONSE descriptions like the above for each of the
+endpoints you expect your API to need.
+
+REQUEST: /country
+RESPONSE: a JSON list of dictionaries, each of which represents one
+country, sorted alphabetically. Each country dictionary will have the
+following fields.
+    name -- (string) the name of the country
+    terrorist attacks -- (integer) the total number of terrorist attacks in that
+    country from 1960 to 2018
+
+REQUEST: /provstate
+RESPONSE: a JSON list of dictionaries, each of which represents one
+provstate, sorted alphabetically. Each province dictionary will have the
+following fields.
+    name -- (string) the name of the provstate
+    (?)terrorist attacks -- (integer) the total number of terrorist attacks in that
+    province from 1960 to 2018
+    eventid -- (integer) an id representing a single instance of a terrorist
+    attack in the given provstate
+    gps coordinates -- (tuple) the gps coordinates of the attack
+    date -- (string) the exact date of the attack
+    summary -- (string) the summary description of the attack
+
+REQUEST: /attack
+RESPONSE: a JSON list of dictionaries, each of which represents one
+city, sorted alphabetically. Each city dictionary will have the
+following fields.
+    eventid -- (integer) an id representing a single instance of a terrorist
+    attack in the given city
+    year -- year terrorist attack occurred
+    month --
+    day --
+    country --
+    city --
+    attack type --
+    gps coordinates -- (tuple)
+    summary:
+
+
+REQUEST: /country/year
+RESPONSE: A JSON list of dictionaries, each of which represents one country in
+in the given year, sorted alphabetically. Each country dictionary will have
+the following fields.
+    name -- (string) the name of the country
+    terrorist attacks -- (string) the total number of terrorist attacks in that
+    country in the given year
+
+REQUEST: /provstate/year
+RESPONSE: A JSON list of dictionaries, each of which represents one provstate in
+in the given year, sorted alphabetically. Each provstate dictionary will have
+the following fields.
+    name -- (string) the name of the provstate
+    (?)terrorist attacks -- (integer) the total number of terrorist attacks in that
+    province in the given year
+    eventid -- (integer) an id representing a single instance of a terrorist
+    attack in the given provstate in the given year
+    gps coordinates -- (tuple) the gps coordinates of the attack
+    date -- (string) the exact date of the attack
+    summary -- (string) the summary description of the attack
+
+REQUEST: /areas/name_contains/{search_text}
+RESPONSE: A JSON list of dictionaries, each of which represents one of the areas
+that contains the search_text, sorted alphabetically. Each area dictionary will
+have the following fields.
+    name -- (string) the name of the area
+    terrorist attacks -- (string) the total number of terrorist attacks in that
+    area in the given year
+    eventid -- (integer) an id representing a single instance of a terrorist
+    attack in the given area in the given year
+    gps coordinates -- (tuple) the gps coordinates of the attack
+    date -- (string) the exact date of the attack
+    summary -- (string) the summary description of the attack
