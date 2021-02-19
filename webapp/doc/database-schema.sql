@@ -47,7 +47,7 @@ CREATE TABLE weapon_subtypes (
 
 CREATE TABLE property_damage (
 	id SERIAL,
-	damage_extent
+	damage_extent text
 );
 
 CREATE TABLE attacks (
@@ -58,8 +58,8 @@ CREATE TABLE attacks (
 	country_id INTEGER,
 	province_id INTEGER,
 	city_id INTEGER,
-	latitute DECIMAL(),
-	longtitude DECIMAL(),
+	latitute NUMERIC,
+	longtitude NUMERIC,
 	summary text,
 	attack_type_id INTEGER,
 	success INTEGER,
