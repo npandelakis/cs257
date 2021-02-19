@@ -1,5 +1,8 @@
 //Nick Pandelakis and Grace de Benedetti
 
+This dataset contains informatrion about terrorist attacks around the world from 1960-2018. This dataset can be obtained by going to 'https://start.umd.edu/gtd/' and requesting access to download it.
+
+
 STORY: A person interested in terrorism stats wants to get data about terrorist
 attacks in the world to help understand where terrorism is most prevalent in
 the world.
