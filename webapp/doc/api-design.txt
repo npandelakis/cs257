@@ -1,27 +1,21 @@
 Grace de Benedetti and Nick Pandelakis
 
 REQUEST: /world
-RESPONSE: a JSON list of dictionaries, each of which represents one
-country, sorted alphabetically. Each country dictionary will have the
-following fields.
+RESPONSE: a JSON list of dictionaries, each of which represents one country, sorted alphabetically. Each country dictionary will have the following fields:
     name -- (string) the name of the country
     terrorist attacks -- (integer) the total number of terrorist attacks in that
     country from 1960 to 2018. If years are specified as a filter, then only the
 	total number of terrorist attacks within those years.
 
 REQUEST: /country
-RESPONSE: a JSON list of dictionaries, each of which represents one
-provstate located in the country, sorted alphabetically. Each province dictionary will have the
-following fields:
+RESPONSE: a JSON list of dictionaries, each of which represents one provstate located in the country, sorted alphabetically. Each province dictionary will have the following fields:
     name -- (string) the name of the provstate
     (?)terrorist attacks -- (integer) the total number of terrorist attacks in that
     province from 1960 to 2018. If years are specified as a filter, then only the
 	total number of terrorist attacks within those years.
 
 REQUEST: /provstate
-RESPONSE: a JSON list of dictionaries, each of which represents a terrorist
-attack that occurred within the specified provstate. Each attack dictionary will come with
-the following fields:
+RESPONSE: a JSON list of dictionaries, each of which represents a terrorist attack that occurred within the specified provstate. Each attack dictionary will come with the following fields:
     eventid -- (integer) an id representing a single instance of a terrorist
     attack in the given provstate
     gps coordinates -- (tuple) the gps coordinates of the attack
@@ -30,9 +24,7 @@ the following fields:
 
 
 REQUEST: /attack
-RESPONSE: a JSON list of dictionaries, each of which represents one
-city, sorted alphabetically. Each city dictionary will have the
-following fields.
+RESPONSE: a JSON list of dictionaries, which contains a single attack whose id matches the request. This dictionary will have the following fields.
     eventid -- (integer) an id representing a single instance of a terrorist
     attack in the given city
 	year -- (integer) year of attack
