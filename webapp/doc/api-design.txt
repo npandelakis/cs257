@@ -10,14 +10,13 @@ RESPONSE: a JSON list of dictionaries, each of which represents one country, sor
 REQUEST: /country
 RESPONSE: a JSON list of dictionaries, each of which represents one provstate located in the country, sorted alphabetically. Each province dictionary will have the following fields:
     name -- (string) the name of the provstate
-    (?)terrorist attacks -- (integer) the total number of terrorist attacks in that
+    terrorist attacks -- (integer) the total number of terrorist attacks in that
     province from 1960 to 2018. If years are specified as a filter, then only the
 	total number of terrorist attacks within those years.
 
 REQUEST: /provstate
 RESPONSE: a JSON list of dictionaries, each of which represents a terrorist attack that occurred within the specified provstate. Each attack dictionary will come with the following fields:
-    eventid -- (integer) an id representing a single instance of a terrorist
-    attack in the given provstate
+    eventid -- (integer) an id representing a single instance of a terrorist attack in the given provstate
     gps coordinates -- (tuple) the gps coordinates of the attack
     date -- (string) the exact date of the attack
     summary -- (string) the summary description of the attack
@@ -25,8 +24,7 @@ RESPONSE: a JSON list of dictionaries, each of which represents a terrorist atta
 
 REQUEST: /attack
 RESPONSE: a JSON list of dictionaries, which contains a single attack whose id matches the request. This dictionary will have the following fields.
-    eventid -- (integer) an id representing a single instance of a terrorist
-    attack in the given city
+    eventid -- (integer) an id representing a single instance of a terrorist attack in the given city
 	year -- (integer) year of attack
 	month -- (integer) month of attack
 	day -- (integer) day of attack
@@ -53,9 +51,7 @@ RESPONSE: a JSON list of dictionaries, which contains a single attack whose id m
 
 
 REQUEST: /search/{search_text}
-RESPONSE: A JSON list of dictionaries, each of which represents either an area
-or perpetrators that contains the search_text, sorted alphabetically. Area
-results will contain the following fields:
+RESPONSE: A JSON list of dictionaries, each of which represents either an area or perpetrators that contains the search_text, sorted alphabetically. Area results will contain the following fields:
     name -- (string) the name of the area
     terrorist attacks -- (integer) the total number of terrorist attacks in that
     province from 1960 to 2018. If years are specified as a filter, then only the
