@@ -1,0 +1,14 @@
+#map-container {
+	position: relative;
+	float: left;
+	height: 0;
+	width: 80%;
+	padding-bottom: 60%;
+	background: DodgerBlue;
+}
+
+.hoverpopup {
+	background: #eeeeee;
+	border: 1px black solid;
+	padding: 3px;
+}

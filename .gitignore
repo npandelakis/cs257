@@ -131,3 +131,6 @@ dmypy.json
 
 #congif file
 olympics/config.py
+
+#csv files
+webapp/database/terrorism.csv
