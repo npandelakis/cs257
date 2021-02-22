@@ -8,8 +8,7 @@
 
 window.onload = initialize;
 
-function initialize(): {
-	
+function initialize(): {	
 	initializeMap();
 }
 
@@ -31,14 +30,27 @@ function initializeMap() {
 	});
 }
 
+function onMapDone(dataMap) {
+	datamap.svg.selectAll('.datamaps-subunit').on('click', onCountryClick);
+}
+
+
 function getTerrorismData() {
-	var url = getAPIBaseURL() + '/world/'
+	//var start_year = document.getElementById('start_year');
+	//var end_year = document.getElementById('end_year')
+	//var url = getAPIBaseURL() + '/world?start_year=' + start_year 
 	
+	var url = getAPIBaseUrl() + '/world/'
+
 	fetch(url, {method: 'get'})
 	
 	.then((response) => response.json())
 	
-	.then(function())//Figure out how to format data here
+	.then(function(response) {
+		
+	
+
+	});//Figure out how to format data
 }
 
 
@@ -48,7 +60,10 @@ function hoverPopupTemplate(geography, data) {
 		attacks = data.attacks;
 	}
 	
+	var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '</strong><br>\n'
+					+ '<strong>Terrorist Attacks</strong>' + attacks + '<br>\n' + '</div>';
 	
+	return template;
 }
 
 function onCountryClick(geography) {
