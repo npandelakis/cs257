@@ -8,12 +8,12 @@
 
 window.onload = initialize;
 
-function initialize() {	
+function initialize() {
 	initializeMap();
 }
 
 async function initializeMap() {
-	
+
 	const mapData = await getTerrorismData();
 
 	var map = new Datamap({
@@ -43,12 +43,12 @@ async function getTerrorismData(callback) {
 	var end_year = document.getElementById('end_year')
 	//var url = getAPIBaseURL() + '/world?start_year=' + start_year
 	//	  + '&end_year =' + end_year
-	var url = 'http://localhost:5000/world'
+	var url = getAPIBaseURL() + '/world/';
 
 	const response = await fetch(url);
 
 	return response.json();
-	
+
 }
 
 function hoverPopupTemplate(geography, data) {
@@ -56,10 +56,10 @@ function hoverPopupTemplate(geography, data) {
 	if (data && 'number_of_attacks' in data) {
 		attacks = data.number_of_attacks;
 	}
-	
+
 	var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '</strong><br>\n'
 					+ '<strong>Terrorist Attacks: </strong>' + attacks + '<br>\n' + '</div>';
-	
+
 	return template;
 }
 
@@ -68,5 +68,5 @@ function onCountryClick(geography) {
 }
 
 function getAPIBaseUrl() {
-	
+
 }
