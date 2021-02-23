@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 '''
-    webapp.py
+    app.py
     Grace de Benedetti and Nick Pandelakis
-    6 November 2020
+    22 February 2021
 
-    A tiny Flask web application, including API, to be used
-    as a template for setting up your web app assignment.
+    A Flask web application, including API, to be used
+    as a template for setting up the rest of our web app.
 '''
 import sys
 import argparse
