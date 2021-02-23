@@ -44,10 +44,10 @@ def get_world_data (start_year,end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
     #query = "SELECT country_attacks_per_year.country_id, country_attacks_per_year.year, country_attacks_per_year.number_of_attacks, countries.country_name FROM country_attacks_per_year, countries WHERE country_attacks_per_year.country_id = countries.id;"
-    query = '''SELECT country_name, country_codes, sum(number_of_attacks) 
-            FROM country_attacks_per_year AS c JOIN countries ON c.country_id = countries.id 
-            WHERE countries.country_codes IS NOT NULL AND c.year >= %s  AND c.year <= %s 
-            GROUP BY (country_name, country_codes);'''
+    query = '''SELECT country_name, country_id, sum(number_of_attacks)
+            FROM country_attacks_per_year AS c JOIN countries ON c.country_id = countries.id
+            WHERE countries.id IS NOT NULL AND c.year >= %s  AND c.year <= %s
+            GROUP BY (country_name, country_id);'''
     cursor.execute(query, (start_year, end_year))
     country_dict = {}
     for row in cursor:
