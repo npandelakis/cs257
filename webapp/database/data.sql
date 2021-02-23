@@ -138,7 +138,8 @@ ALTER SEQUENCE public.cities_id_seq OWNED BY public.cities.id;
 
 CREATE TABLE public.countries (
     id integer NOT NULL,
-    country_name text
+    country_name text,
+    country_codes text
 );
 
 
@@ -335,6 +336,16 @@ ALTER SEQUENCE public.target_types_id_seq OWNED BY public.target_types.id;
 
 
 --
+-- Name: temp; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.temp (
+    code text,
+    country text
+);
+
+
+--
 -- Name: weapon_subtypes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -499,212 +510,212 @@ COPY public.cities (id, city_name) FROM stdin;
 -- Data for Name: countries; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.countries (id, country_name) FROM stdin;
-58	Dominican Republic
-130	Mexico
-160	Philippines
-78	Greece
-101	Japan
-217	United States
-218	Uruguay
-98	Italy
-499	East Germany (GDR)
-65	Ethiopia
-83	Guatemala
-222	Venezuela
-362	West Germany (FRG)
-199	Switzerland
-102	Jordan
-185	Spain
-30	Brazil
-60	Egypt
-11	Argentina
-110	Lebanon
-96	Ireland
-209	Turkey
-158	Paraguay
-94	Iran
-603	United Kingdom
-45	Colombia
-26	Bolivia
-145	Nicaragua
-142	Netherlands
-21	Belgium
-38	Canada
-14	Australia
-153	Pakistan
-230	Zambia
-198	Sweden
-49	Costa Rica
-406	South Yemen
-36	Cambodia
-97	Israel
-161	Poland
-201	Taiwan
-156	Panama
-106	Kuwait
-155	West Bank and Gaza Strip
-15	Austria
-236	Czechoslovakia
-92	India
-69	France
-428	South Vietnam
-31	Brunei
-604	Zaire
-605	People's Republic of the Congo
-162	Portugal
-6	Algeria
-61	El Salvador
-205	Thailand
-87	Haiti
-195	Sudan
-136	Morocco
-53	Cyprus
-138	Myanmar
-4	Afghanistan
-159	Peru
-43	Chile
-88	Honduras
-235	Yugoslavia
-59	Ecuador
-144	New Zealand
-121	Malaysia
-178	Singapore
-29	Botswana
-100	Jamaica
-42	Chad
-377	North Yemen
-7	Andorra
-200	Syria
-184	South Korea
-215	United Arab Emirates
-183	South Africa
-104	Kenya
-95	Iraq
-182	Somalia
-203	Tanzania
-186	Sri Lanka
-139	Namibia
-17	Bahamas
-147	Nigeria
-20	Barbados
-207	Trinidad and Tobago
-19	Bangladesh
-8	Angola
-128	Mauritania
-173	Saudi Arabia
-56	Djibouti
-93	Indonesia
-124	Malta
-403	Rhodesia
-359	Soviet Union
-55	Denmark
-349	Western Sahara
-86	Guyana
-137	Mozambique
-208	Tunisia
-213	Uganda
-151	Norway
-111	Lesotho
-72	Gabon
-113	Libya
-18	Bahrain
-89	Hong Kong
-174	Senegal
-231	Zimbabwe
-84	Guinea
-80	Grenada
-532	New Hebrides
-22	Belize
-81	Guadeloupe
-127	Martinique
-221	Vatican City
-5	Albania
-41	Central African Republic
-176	Seychelles
-57	Dominica
-164	Qatar
-32	Bulgaria
-196	Suriname
-197	Swaziland
-116	Luxembourg
-91	Iceland
-70	French Guiana
-66	Falkland Islands
-33	Burkina Faso
-143	New Caledonia
-166	Romania
-146	Niger
-141	Nepal
-204	Togo
-68	Finland
-67	Fiji
-76	Ghana
-122	Maldives
-129	Mauritius
-90	Hungary
-108	Laos
-157	Papua New Guinea
-44	China
-112	Liberia
-47	Republic of the Congo
-123	Mali
-75	Germany
-228	Yemen
-168	Rwanda
-177	Sierra Leone
-37	Cameroon
-51	Cuba
-50	Croatia
-74	Georgia
-16	Azerbaijan
-119	Madagascar
-115	Lithuania
-34	Burundi
-214	Ukraine
-132	Moldova
-12	Armenia
-167	Russia
-99	Ivory Coast
-103	Kazakhstan
-10	Antigua and Barbuda
-28	Bosnia-Herzegovina
-62	Equatorial Guinea
-202	Tajikistan
-120	Malawi
-219	Uzbekistan
-109	Latvia
-64	Estonia
-223	Vietnam
-46	Comoros
-23	Benin
-179	Slovak Republic
-118	Macedonia
-226	Wallis and Futuna
-35	Belarus
-54	Czech Republic
-180	Slovenia
-73	Gambia
-149	North Korea
-63	Eritrea
-189	St. Kitts and Nevis
-71	French Polynesia
-117	Macau
-107	Kyrgyzstan
-220	Vanuatu
-229	Democratic Republic of the Congo
-1003	Kosovo
-181	Solomon Islands
-347	East Timor
-190	St. Lucia
-85	Guinea-Bissau
-1002	Montenegro
-422	International
-210	Turkmenistan
-175	Serbia-Montenegro
-25	Bhutan
-1001	Serbia
-1004	South Sudan
+COPY public.countries (id, country_name, country_codes) FROM stdin;
+217	United States	USA
+499	East Germany (GDR)	DEU
+362	West Germany (FRG)	DEU
+406	South Yemen	YEM
+155	West Bank and Gaza Strip	PSE
+428	South Vietnam	VNM
+605	People's Republic of the Congo	COG
+377	North Yemen	YEM
+203	Tanzania	TZA
+17	Bahamas	BHS
+403	Rhodesia	ZWE
+359	Soviet Union	RUS
+28	Bosnia-Herzegovina	BIH
+236	Czechoslovakia	\N
+604	Zaire	\N
+235	Yugoslavia	\N
+178	Singapore	\N
+7	Andorra	\N
+20	Barbados	\N
+124	Malta	\N
+18	Bahrain	\N
+89	Hong Kong	\N
+80	Grenada	\N
+532	New Hebrides	\N
+81	Guadeloupe	\N
+127	Martinique	\N
+221	Vatican City	\N
+176	Seychelles	\N
+57	Dominica	\N
+122	Maldives	\N
+129	Mauritius	\N
+10	Antigua and Barbuda	\N
+46	Comoros	\N
+179	Slovak Republic	\N
+1001	Serbia	SRB
+226	Wallis and Futuna	\N
+189	St. Kitts and Nevis	\N
+71	French Polynesia	\N
+117	Macau	\N
+190	St. Lucia	\N
+85	Guinea-Bissau	\N
+422	International	\N
+175	Serbia-Montenegro	\N
+58	Dominican Republic	DOM
+130	Mexico	MEX
+160	Philippines	PHL
+78	Greece	GRC
+101	Japan	JPN
+218	Uruguay	URY
+98	Italy	ITA
+65	Ethiopia	ETH
+83	Guatemala	GTM
+222	Venezuela	VEN
+199	Switzerland	CHE
+102	Jordan	JOR
+185	Spain	ESP
+30	Brazil	BRA
+60	Egypt	EGY
+11	Argentina	ARG
+110	Lebanon	LBN
+96	Ireland	IRL
+209	Turkey	TUR
+158	Paraguay	PRY
+94	Iran	IRN
+603	United Kingdom	GBR
+45	Colombia	COL
+26	Bolivia	BOL
+145	Nicaragua	NIC
+142	Netherlands	NLD
+21	Belgium	BEL
+38	Canada	CAN
+14	Australia	AUS
+153	Pakistan	PAK
+230	Zambia	ZMB
+198	Sweden	SWE
+49	Costa Rica	CRI
+36	Cambodia	KHM
+97	Israel	ISR
+161	Poland	POL
+201	Taiwan	TWN
+156	Panama	PAN
+106	Kuwait	KWT
+15	Austria	AUT
+92	India	IND
+69	France	FRA
+31	Brunei	BRN
+162	Portugal	PRT
+6	Algeria	DZA
+61	El Salvador	SLV
+205	Thailand	THA
+87	Haiti	HTI
+195	Sudan	SDN
+136	Morocco	MAR
+53	Cyprus	CYP
+138	Myanmar	MMR
+4	Afghanistan	AFG
+159	Peru	PER
+43	Chile	CHL
+88	Honduras	HND
+59	Ecuador	ECU
+144	New Zealand	NZL
+121	Malaysia	MYS
+29	Botswana	BWA
+100	Jamaica	JAM
+42	Chad	TCD
+200	Syria	SYR
+184	South Korea	KOR
+215	United Arab Emirates	ARE
+183	South Africa	ZAF
+104	Kenya	KEN
+95	Iraq	IRQ
+182	Somalia	SOM
+186	Sri Lanka	LKA
+139	Namibia	NAM
+147	Nigeria	NGA
+207	Trinidad and Tobago	TTO
+19	Bangladesh	BGD
+8	Angola	AGO
+128	Mauritania	MRT
+173	Saudi Arabia	SAU
+56	Djibouti	DJI
+93	Indonesia	IDN
+55	Denmark	DNK
+349	Western Sahara	ESH
+86	Guyana	GUY
+137	Mozambique	MOZ
+208	Tunisia	TUN
+213	Uganda	UGA
+151	Norway	NOR
+111	Lesotho	LSO
+72	Gabon	GAB
+113	Libya	LBY
+174	Senegal	SEN
+231	Zimbabwe	ZWE
+84	Guinea	GIN
+22	Belize	BLZ
+5	Albania	ALB
+41	Central African Republic	CAF
+164	Qatar	QAT
+32	Bulgaria	BGR
+196	Suriname	SUR
+197	Swaziland	SWZ
+116	Luxembourg	LUX
+91	Iceland	ISL
+70	French Guiana	GUF
+66	Falkland Islands	FLK
+33	Burkina Faso	BFA
+143	New Caledonia	NCL
+166	Romania	ROU
+146	Niger	NER
+141	Nepal	NPL
+204	Togo	TGO
+68	Finland	FIN
+67	Fiji	FJI
+76	Ghana	GHA
+90	Hungary	HUN
+108	Laos	LAO
+157	Papua New Guinea	PNG
+44	China	CHN
+112	Liberia	LBR
+47	Republic of the Congo	COG
+123	Mali	MLI
+75	Germany	DEU
+228	Yemen	YEM
+168	Rwanda	RWA
+177	Sierra Leone	SLE
+37	Cameroon	CMR
+51	Cuba	CUB
+50	Croatia	HRV
+74	Georgia	GEO
+16	Azerbaijan	AZE
+119	Madagascar	MDG
+115	Lithuania	LTU
+34	Burundi	BDI
+214	Ukraine	UKR
+132	Moldova	MDA
+12	Armenia	ARM
+167	Russia	RUS
+99	Ivory Coast	CIV
+103	Kazakhstan	KAZ
+62	Equatorial Guinea	GNQ
+202	Tajikistan	TJK
+120	Malawi	MWI
+219	Uzbekistan	UZB
+109	Latvia	LVA
+64	Estonia	EST
+223	Vietnam	VNM
+23	Benin	BEN
+118	Macedonia	MKD
+35	Belarus	BLR
+54	Czech Republic	CZE
+180	Slovenia	SVN
+73	Gambia	GMB
+149	North Korea	PRK
+63	Eritrea	ERI
+107	Kyrgyzstan	KGZ
+220	Vanuatu	VUT
+229	Democratic Republic of the Congo	COD
+1003	Kosovo	-99
+181	Solomon Islands	SLB
+347	East Timor	TLS
+1002	Montenegro	MNE
+210	Turkmenistan	TKM
+25	Bhutan	BTN
+1004	South Sudan	SSD
 \.
 
 
@@ -4633,6 +4644,192 @@ COPY public.target_subtypes (id, target_subtype) FROM stdin;
 --
 
 COPY public.target_types (id, target_type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: temp; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.temp (code, country) FROM stdin;
+AFG	Afghanistan
+AGO	Angola
+ALB	Albania
+ARE	United Arab Emirates
+ARG	Argentina
+ARM	Armenia
+ATA	Antarctica
+ATF	French Southern and Antarctic Lands
+AUS	Australia
+AUT	Austria
+AZE	Azerbaijan
+BDI	Burundi
+BEL	Belgium
+BEN	Benin
+BFA	Burkina Faso
+BGD	Bangladesh
+BGR	Bulgaria
+BHS	The Bahamas
+BIH	Bosnia and Herzegovina
+BLR	Belarus
+BLZ	Belize
+BOL	Bolivia
+BRA	Brazil
+BRN	Brunei
+BTN	Bhutan
+BWA	Botswana
+CAF	Central African Republic
+CAN	Canada
+CHE	Switzerland
+CHL	Chile
+CHN	China
+CIV	Ivory Coast
+CMR	Cameroon
+COD	Democratic Republic of the Congo
+COG	Republic of the Congo
+COL	Colombia
+CRI	Costa Rica
+CUB	Cuba
+-99	Northern Cyprus
+CYP	Cyprus
+CZE	Czech Republic
+DEU	Germany
+DJI	Djibouti
+DNK	Denmark
+DOM	Dominican Republic
+DZA	Algeria
+ECU	Ecuador
+EGY	Egypt
+ERI	Eritrea
+ESP	Spain
+EST	Estonia
+ETH	Ethiopia
+FIN	Finland
+FJI	Fiji
+FLK	Falkland Islands
+FRA	France
+GUF	French Guiana
+GAB	Gabon
+GBR	United Kingdom
+GEO	Georgia
+GHA	Ghana
+GIN	Guinea
+GMB	Gambia
+GNB	Guinea Bissau
+GNQ	Equatorial Guinea
+GRC	Greece
+GRL	Greenland
+GTM	Guatemala
+GUY	Guyana
+HND	Honduras
+HRV	Croatia
+HTI	Haiti
+HUN	Hungary
+IDN	Indonesia
+IND	India
+IRL	Ireland
+IRN	Iran
+IRQ	Iraq
+ISL	Iceland
+ISR	Israel
+ITA	Italy
+JAM	Jamaica
+JOR	Jordan
+JPN	Japan
+KAZ	Kazakhstan
+KEN	Kenya
+KGZ	Kyrgyzstan
+KHM	Cambodia
+KOR	South Korea
+-99	Kosovo
+KWT	Kuwait
+LAO	Laos
+LBN	Lebanon
+LBR	Liberia
+LBY	Libya
+LKA	Sri Lanka
+LSO	Lesotho
+LTU	Lithuania
+LUX	Luxembourg
+LVA	Latvia
+MAR	Morocco
+MDA	Moldova
+MDG	Madagascar
+MEX	Mexico
+MKD	Macedonia
+MLI	Mali
+MMR	Myanmar
+MNE	Montenegro
+MNG	Mongolia
+MOZ	Mozambique
+MRT	Mauritania
+MWI	Malawi
+MYS	Malaysia
+NAM	Namibia
+NCL	New Caledonia
+NER	Niger
+NGA	Nigeria
+NIC	Nicaragua
+NLD	Netherlands
+NOR	Norway
+NPL	Nepal
+NZL	New Zealand
+OMN	Oman
+PAK	Pakistan
+PAN	Panama
+PER	Peru
+PHL	Philippines
+PNG	Papua New Guinea
+POL	Poland
+PRI	Puerto Rico
+PRK	North Korea
+PRT	Portugal
+PRY	Paraguay
+QAT	Qatar
+ROU	Romania
+RUS	Russia
+RWA	Rwanda
+ESH	Western Sahara
+SAU	Saudi Arabia
+SDN	Sudan
+SSD	South Sudan
+SEN	Senegal
+SLB	Solomon Islands
+SLE	Sierra Leone
+SLV	El Salvador
+-99	Somaliland
+SOM	Somalia
+SRB	Republic of Serbia
+SUR	Suriname
+SVK	Slovakia
+SVN	Slovenia
+SWE	Sweden
+SWZ	Swaziland
+SYR	Syria
+TCD	Chad
+TGO	Togo
+THA	Thailand
+TJK	Tajikistan
+TKM	Turkmenistan
+TLS	East Timor
+TTO	Trinidad and Tobago
+TUN	Tunisia
+TUR	Turkey
+TWN	Taiwan
+TZA	United Republic of Tanzania
+UGA	Uganda
+UKR	Ukraine
+URY	Uruguay
+USA	United States of America
+UZB	Uzbekistan
+VEN	Venezuela
+VNM	Vietnam
+VUT	Vanuatu
+PSE	West Bank
+YEM	Yemen
+ZAF	South Africa
+ZMB	Zambia
+ZWE	Zimbabwe
 \.
 
 
