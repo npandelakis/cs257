@@ -4,8 +4,7 @@
     Grace de Benedetti and Nick Pandelakis
     22 February 2021
 
-    A Flask web application, including API, to be used
-    as a template for setting up the rest of our web app.
+    A Flask web application to display global terrorism data.
 '''
 
 import sys

@@ -1,9 +1,9 @@
-/*
+/* world-map.js
  *
+ * Javascript to query the /api/world/ endpoint
+ * and display the data on a world map.
  *
- *
- *
- *
+ * Written by Nick Pandelakis and Grace de Benedetti
  */
 
 window.onload = initialize;

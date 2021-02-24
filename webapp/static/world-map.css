@@ -1,3 +1,10 @@
+/* world-map.css
+ *
+ * css to handle base map coloring
+ *
+ * Written by Nick Pandelakis and Grace de Benedetti
+ */
+
 #map-container {
 	position: relative;
 	float: left;

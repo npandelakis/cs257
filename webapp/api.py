@@ -3,7 +3,7 @@
     Grace de Benedetti and Nick Pandelakis
     23 February 2021
 
-    Tiny Flask API to support the tiny books web application.
+    Flask API to support the webapp project for cs257.
 '''
 import sys
 import argparse
