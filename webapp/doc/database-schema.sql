@@ -5,15 +5,6 @@ CREATE TABLE countries (
 	country_name text
 );
 
-CREATE TABLE provinces (
-	id SERIAL,
-	province_name text
-);
-
-CREATE TABLE cities (
-	id SERIAL,
-	city_name text
-);
 
 CREATE TABLE attack_types (
 	id SERIAL,
@@ -25,10 +16,6 @@ CREATE TABLE target_types (
 	target_type text
 );
 
-CREATE TABLE perpetrator (
-	id SERIAL,
-	perpetrator text
-);
 
 CREATE TABLE target_subtypes (
 	id SERIAL,
@@ -51,15 +38,16 @@ CREATE TABLE property_damage (
 );
 
 CREATE TABLE attacks (
-	id SERIAL,
+	id BIGINT,
 	year INTEGER,
 	month INTEGER,
 	day INTEGER,
 	country_id INTEGER,
-	province_id INTEGER,
-	city_id INTEGER,
+	province text,
+	city text,
 	latitute NUMERIC,
 	longtitude NUMERIC,
+	location text,
 	summary text,
 	attack_type_id INTEGER,
 	success INTEGER,
@@ -67,13 +55,13 @@ CREATE TABLE attacks (
 	target_type_id INTEGER,
 	target_subtype_id INTEGER,
 	target text,
-	perp_id INTEGER,
+	perp text,
 	motive text,
 	weapon_type_id INTEGER,
 	weapon_subtype_id INTEGER,
 	weapon_detail text,
-	number_killed INTEGER,
-	number_wounded INTEGER,
+	number_killed NUMERIC,
+	number_wounded NUMERIC,
 	property_damage_id INTEGER
 );
 
@@ -88,7 +76,3 @@ CREATE TABLE province_attacks_per_year (
 	year INTEGER,
 	number_of_attacks INTEGER
 );
-
-
-
-
