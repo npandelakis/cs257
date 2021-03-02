@@ -17,6 +17,10 @@ app.register_blueprint(api.api, url_prefix='/api')
 
 
 @app.route('/')
+def help():
+    return flask.render_template('help.html')
+
+@app.route('/world/')
 def home():
     return flask.render_template('world-map.html')
 
