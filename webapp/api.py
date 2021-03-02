@@ -92,3 +92,75 @@ def get_country_ids(country_code) -> tuple:
     #tuple type to allow for easy plugin to the query. This is necessary since some
     #countries share a country code, like East Germany and West Germany.
     return tuple(country_id_list)
+
+
+@api.route('/attack/<attack_id>')
+def get_attack(attack_id):
+    start_year = request.args.get('start_year', default = 1960)
+    end_year = request.args.get('end_year', default = 2018)
+    attack_info = get_attack_info(attack_id, start_year, end_year)
+    return json.dumps(attack_info)
+
+def get_attack_info(attack_id, start_year, end_year):
+    connection = connect_to_database()
+    cursor = connection.cursor()
+    query = '''SELECT id,
+            year,
+        	month,
+        	day,
+        	country_id,
+        	province,
+        	city,
+        	latitute,
+        	longtitude,
+        	location,
+        	summary,
+        	attack_type_id,
+        	success,
+        	suicide,
+        	target_type_id,
+        	target_subtype_id,
+        	target,
+        	perp,
+        	motive,
+        	weapon_type_id,
+        	weapon_subtype_id,
+        	weapon_detail,
+        	number_killed,
+        	number_wounded,
+        	property_damage_id
+            FROM attacks
+            WHERE id in %s
+            AND year >= %s
+            And year <= %s;'''
+    cursor.execute(query, (attack_id, start_year, end_year))
+    attack_dict = {}
+    for row in cursor:
+        #return lat and long as strings to preserve precise decimal values
+        attack_dict[row[0]] = {'id' : int(row[0]),
+                                'year' : int(row[1]),
+                                'month' : int(row[2]),
+                                'day' : int(row[3]),
+                                'country_id' : int(row[4]),
+                            	'province' : str(row[5]),
+                            	'city' : str(row[6]),
+                                'latitude' : str(row[4]),
+                                'longitude' : str(row[5]),
+                                'location' : str(row[6]),
+                                'summary' : str(row[7]),
+                                'attack_type_id': int(row[8]),
+                            	'success': int(row[9]),
+                            	'suicide' : int(row[10]),
+                            	'target_type_id' : int(row[11]),
+                            	'target_subtype_id' : int(row[12]),
+                            	'target' : str(row[13]),
+                            	'perp' : str(row[14]),
+                            	'motive' : str(row[15]),
+                            	'weapon_type_id' : int(row[16]),
+                            	'weapon_subtype_id' : int(row[17]),
+                            	'weapon_detail' : str(row[18]),
+                            	'number_killed' : int(row[18]),
+                            	'number_wounded' : int(row[19]),
+                            	'property_damage_id' : int(row[20])}
+
+    return attack_dict
