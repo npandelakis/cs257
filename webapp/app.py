@@ -29,6 +29,10 @@ def home():
 def country_page(country_code):
     return flask.render_template('country_template.html', country_code = country_code)
 
+@app.rout('/attack/<attack_id>')
+    def attack_page(attack_id):
+        return flask.render_template('attack_template.html', attack_id = attack_id)
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A tiny Flask application, including API')
     parser.add_argument('host', help='the host on which this application is running')
