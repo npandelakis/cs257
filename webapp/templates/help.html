@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Terrorism Database Web Application</title>
+</head>
+<body>
+    <pre>Terrorist API
+
+    REQUEST: /help
+    RESPONSE:
+        This page with help on how to use the Terrorism Web Application.
+
+    REQUEST: /world
+    RESPONSE: a JSON list of dictionaries, each of which represents one country,
+    sorted alphabetically. Each country dictionary will have the following fields:
+        name -- (string) the name of the country
+        terrorist attacks -- (integer) the total number of terrorist attacks in that
+        country from 1960 to 2018. If years are specified as a filter, then only the
+    	total number of terrorist attacks within those years.
+    APPLICATION: A world heat map representing the density of terrorist attacks per country.
+
+    REQUEST: /country/{country_code}
+    RESPONSE: a JSON list of dictionaries, each of which represents one attack
+    that occurred in the country matching the country_code. If years are specified as a filter, then only the
+    terrorist attacks within those years will be included. Each attack dictionary will have the following fields:
+        attack_id -- (integer) the id of the attack
+        year -- (integer) the year in which the attack occurred.
+        month -- (integer) the month in which the attack occurred.
+        day -- (integer) the day on which the attack occurred.
+        latitude -- (tuple) the latittude gps coordinate of the attack
+        longitude -- (tuple) the longitude gps coordinate of the attack
+        summary -- (string) the summary description of the attack
+    APPLICATION: A map of one country whose code matches the county_code given. A code will
+    be returned by clicking on a specific country from the world map page. The
+    country map will have pins, each representing and individual terrorist attack
+    that occurred in the given country. Rolling the mouse over a pin will give summary
+    information about the attack.
+
+    REQUEST: /attack
+    RESPONSE: a JSON list of dictionaries, which contains a single attack whose id
+    matches the request. This dictionary will have the following fields.
+        eventid -- (integer) an id representing a single instance of a terrorist attack in the given city
+    	year -- (integer) year of attack
+    	month -- (integer) month of attack
+    	day -- (integer) day of attack
+    	country -- (string) The name of the country where attack took place
+    	province -- (string) The name of the provstate where attack took place
+    	city -- (string) The name of city where attack took place
+    	latitude -- (decimal) latitude where attack took place
+    	longitude -- (decimal) longitude where attack took place
+    	summary -- (string) summary of attack
+    	attack_type -- (string) The attack type
+    	success -- (integer) Whether or not the attack was successful
+    	suicide -- (integer) Whether or not it was a suicide attack
+    	target_type -- (string) The target type
+    	target_subtype -- (string) The target subtype
+    	target -- (string) Description of the target of the attack
+    	perpetrator -- (string) The perpetrator of the attack
+    	motive -- (string) The motive of the attack
+    	weapon_type -- (string) The type of weapon used
+    	weapon_subtype -- (string) The subtype of the weapon used
+    	weapon_detail -- (string) Other details about the weapon
+    	number_killed -- (integer) The number of people killed in the attack
+    	number_wounded -- (integer) The number of people wounded in the attack
+    	property_damage -- (string) The estimated dollar amount of property damage
+    APPLICATION: A page giving information and statistics about a certain attack that matches
+    the attack_id. attack_id is returned by clicking on a specific pin from the
+    country map page. A summary of the attack as well as details regarding the
+    attack will be displayed.
+
+
+    REQUEST: /search/{search_text}
+    RESPONSE: A JSON list of dictionaries, each of which represents either an area or
+    perpetrators that contains the search_text, sorted alphabetically. Area results will contain the following fields:
+        name -- (string) the name of the area
+        terrorist attacks -- (integer) the total number of terrorist attacks in that
+        province from 1960 to 2018. If years are specified as a filter, then only the
+    	total number of terrorist attacks within those years.
+    perpetrator results will contain the following fields:
+        eventid -- (integer) an id representing a single instance of a terrorist
+        attack in the given area in the given year
+        date -- (string) the exact date of the attack
+    	perpetrator -- (string) the perpetrator of the attack
+        summary -- (string) the summary description of the attack
+
+    For example in application:
+
+        /world
+
+    will show a map of the world with each country colored based on the amount
+    of attacks it suffered between 1960 and 2018.
+
+        /country/{USA}
+
+    will show a map of the United States with pins for each attack that occured
+    in the United States between 1960 and 2018.
+    </pre>
+</body>
+</html>
