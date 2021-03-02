@@ -15,14 +15,15 @@ import api
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 app.register_blueprint(api.api, url_prefix='/api')
 
-# This route delivers the user your site's home page.
+
 @app.route('/')
 def home():
     return flask.render_template('world-map.html')
 
-# This route supports relative links among your web pages, assuming those pages
-# are stored in the templates/ directory or one of its descendant directories,
-# without requiring you to have specific routes for each page.
+
+@app.route('/countries/<country_code>')
+def country_page(country_code):
+    return flask.render_template('country_template.html', country_code = country_code)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A tiny Flask application, including API')
