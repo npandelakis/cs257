@@ -53,14 +53,14 @@ def get_country(country_code):
     country_code = country_code.upper()
     start_year = request.args.get('start_year', default = 1960)
     end_year = request.args.get('end_year', default = 2018)
-    country_attacks = get_country_attacks(country_code, start_year, end_year)
+    country_ids_tuple = get_country_ids(country_code)
+    country_attacks = get_country_attacks(country_ids_tuple, start_year, end_year)
     return json.dumps(country_attacks)
 
-def get_country_attacks(country_code, start_year, end_year):
-    country_ids_tuple = get_country_ids(country_code)
+def get_country_attacks(country_ids_tuple, start_year, end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
-    query = '''SELECT id, year, month, day, latitude, longitude, summary
+    query = '''SELECT id, year, month, day, latitute, longtitude, summary
             FROM attacks
             WHERE country_id in %s
             AND year >= %s
@@ -164,3 +164,13 @@ def get_attack_info(attack_id, start_year, end_year):
                             	'property_damage_id' : int(row[20])}
 
     return attack_dict
+
+@api.route('/search/<search_text>')
+def get_area(search_text):
+    #Allow for lowercase country codes
+    search_text = search_text.upper()
+    start_year = request.args.get('start_year', default = 1960)
+    end_year = request.args.get('end_year', default = 2018)
+    country_ids_tuple = get_country_ids(search_text)
+    country_attacks = get_country_attacks(country_ids_tuple, start_year, end_year)
+    return json.dumps(country_attacks)
