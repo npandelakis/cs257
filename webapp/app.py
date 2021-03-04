@@ -20,7 +20,7 @@ app.register_blueprint(api.api, url_prefix='/api')
 def help():
     return flask.render_template('help.html')
 
-@app.route('/world/')
+@app.route('/world')
 def home():
     return flask.render_template('world-map.html')
 
@@ -29,9 +29,9 @@ def home():
 def country_page(country_code):
     return flask.render_template('country_template.html', country_code = country_code)
 
-@app.rout('/attack/<attack_id>')
-    def attack_page(attack_id):
-        return flask.render_template('attack_template.html', attack_id = attack_id)
+@app.route('/attack/<attack_id>')
+def attack_page(attack_id):
+    return flask.render_template('attack_template.html', attack_id = attack_id)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A tiny Flask application, including API')

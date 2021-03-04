@@ -44,7 +44,7 @@ def get_world_data (start_year,end_year):
     cursor.execute(query, (start_year, end_year))
     country_dict = {}
     for row in cursor:
-      country_dict[row[1]] = {'country_name' : row[0], 'number_of_attacks' : int(row[2]), 'fillColor' : '#F48FB1'}
+      country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : '#F48FB1'}
     return country_dict
 
 @api.route('/countries/<country_code>')
@@ -66,17 +66,18 @@ def get_country_attacks(country_code, start_year, end_year):
             AND year >= %s
             And year <= %s;'''
     cursor.execute(query, (country_ids_tuple, start_year, end_year))
-    country_attacks_dict = {}
+    country_attacks_list = []
     for row in cursor:
         #return lat and long as strings to preserve precise decimal values
-        country_attacks_dict[row[0]] = {'year' : int(row[1]),
+        country_attacks_list.append({ 'id' : int(row[0]),
+                                'year' : int(row[1]),
                                 'month' : int(row[2]),
                                 'day' : int(row[3]),
                                 'latitude' : str(row[4]),
                                 'longitude' : str(row[5]),
-                                'summary' : row[6]}
+                                'summary' : row[6]})
 
-    return country_attacks_dict
+    return country_attacks_list
 
 def get_country_ids(country_code) -> tuple:
     connection  = connect_to_database()
@@ -164,3 +165,17 @@ def get_attack_info(attack_id, start_year, end_year):
                             	'property_damage_id' : int(row[20])}
 
     return attack_dict
+
+@api.route('/centroid/<country_code>')
+def get_centroid(country_code):
+    country_code = country_code.upper()
+    connection  = connect_to_database()
+    cursor = connection.cursor()
+    query = '''SELECT centroid_long,centroid_lat FROM countries WHERE country_codes = %s LIMIT 1;'''
+    cursor.execute(query, (country_code,))
+
+    centroid_coords = []
+    for row in cursor:
+        centroid_coords.append({"longitude" : str(row[0]), "latitude" : str(row[1])})
+
+    return json.dumps(centroid_coords)

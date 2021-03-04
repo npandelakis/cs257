@@ -63,10 +63,13 @@ function hoverPopupTemplate(geography, data) {
 	return template;
 }
 
-function onCountryClick(geography) {
-//	window.location = getAPIBaseUrl + '/' + geography.properties.name '/';
+function onCountryClick(data) {
+	//This doesn't work
+
+	//var countryWindow = window.open('http://localhost:5000/countries/' + data.id)
+	//countryWindow.location.reload();
 }
 
 function getAPIBaseUrl() {
-
+	
 }
