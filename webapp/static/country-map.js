@@ -25,7 +25,6 @@ async function initializeMap() {
     var map = new Datamap({
         element: element,
         scope: countryCode,
-        data: {},
         setProjection: function(element) {
             var projection = d3.geo.equirectangular()
                 .center(centroid)
@@ -42,11 +41,26 @@ async function initializeMap() {
         geographyConfig: {
             highlightOnHover: false,
             popupOnHover: false
+        },
+        done: function(datamap){
+            datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
+            function redraw() {
+
+                datamap.svg.selectAll(".datamaps-marker")
+                .attr("height", 20/d3.event.scale)
+                .attr("width", 20/d3.event.scale)
+                .attr("x", function(markerData) {
+                    return markerData.realx - 20/d3.event.scale/2;
+                })
+                .attr("y", function(markerData) {
+                    return markerData.realy - 20/d3.event.scale;
+                });
+                datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+            }
         }
     });
 
-    //console.log(d3.select("g").append("svg").attr("width", element.offsetWidth).attr("height", element.offsetHeight));
-    var svg = d3.select("g").append("svg").attr("width", element.offsetWidth).attr("height", element.offsetHeight).append("g");
 
 
     //Only way I could get this to work was to copy paste it in from another file.
@@ -81,7 +95,10 @@ async function initializeMap() {
           else if (markerData.centered) {
             latLng = self.path.centroid(svg.select('path.' + markerData.centered).data()[0]);
           }
-          if (latLng) return (latLng[0] - (options.icon.width / 2));
+          if (latLng) {
+            markerData.realx = latLng[0];
+            return (latLng[0] - (options.icon.width / 2));
+          }
         })
         .attr('y', function (markerData) {
           var latLng;
@@ -91,7 +108,10 @@ async function initializeMap() {
           else if (markerData.centered) {
             latLng = self.path.centroid(svg.select('path.' + markerData.centered).data()[0]);
           }
-          if (latLng) return (latLng[1] - options.icon.height);
+          if (latLng){
+              markerData.realy = latLng[1];
+              return (latLng[1] - options.icon.height);
+          }
         })
         .on('mouseover', function (markerData) {
           var $this = d3.select(this);
@@ -129,11 +149,14 @@ async function initializeMap() {
         popupOnHover: true,
         popupTemplate: function(data) {
             var summary = '';
-            if (data && 'summary' in data) {
+            if (data.summary) {
                 summary = data.summary;
+                var template = '<div class = "hoverpopup">'+ summary + '</div>';
+                return template;
+            } else {
+                var template = '<div class = "hoverpopup">No Summary Available.</div>';
+                return template;
             }
-            var template = '<div class = "hoverpopup">'+ summary + '</div>';
-            return template;
         },
         icon: {
             url: '/static/map-marker.png',
@@ -160,16 +183,18 @@ async function getMapMarkers() {
     var mapMarkers = [];
 
     for (var i = 0; i < data.length; i++) {
-
         var attack = data[i];
 
-        mapMarkers.push({
-            "name" : attack.id,
-            "radius" : 10,
-            "latitude": attack.latitude,
-            "longitude": attack.longitude,
-            "summary" : attack.summary
-        });
+        if (attack.latitude !== "None" && attack.longitude !== "None") {
+
+            mapMarkers.push({
+                "name" : attack.id,
+                "radius" : 10,
+                "latitude": attack.latitude,
+                "longitude": attack.longitude,
+                "summary" : attack.summary
+            });
+        }
     };
 
     return mapMarkers;
@@ -178,7 +203,6 @@ async function getMapMarkers() {
 
 function getCountryCode() {
     var pathname = window.location.pathname;
-    console.log(pathname)
     return pathname.split('/').pop();
 }
 

@@ -66,10 +66,9 @@ function hoverPopupTemplate(geography, data) {
 function onCountryClick(data) {
 	//This doesn't work
 
-	//var countryWindow = window.open('http://localhost:5000/countries/' + data.id)
-	//countryWindow.location.reload();
+	window.location = '/countries/' + data.id.toLowerCase();
 }
 
 function getAPIBaseUrl() {
-	
+
 }
