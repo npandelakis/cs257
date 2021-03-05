@@ -53,7 +53,7 @@ async function initializeMap() {
                     return markerData.realx - 20/d3.event.scale/2;
                 })
                 .attr("y", function(markerData) {
-                    return markerData.realy - 20/d3.event.scale;
+                    return markerData.realy - 20/d3.event.scale ;
                 });
                 datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 

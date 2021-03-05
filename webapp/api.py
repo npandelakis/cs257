@@ -60,7 +60,7 @@ def get_country(country_code):
 def get_country_attacks(country_ids_tuple, start_year, end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
-    query = '''SELECT id, year, month, day, latitute, longtitude, summary
+    query = '''SELECT id, year, month, day, latitude, longitude, summary
             FROM attacks
             WHERE country_id in %s
             AND year >= %s
@@ -112,8 +112,8 @@ def get_attack_info(attack_id, start_year, end_year):
         	country_id,
         	province,
         	city,
-        	latitute,
-        	longtitude,
+        	latitude,
+        	longitude,
         	location,
         	summary,
         	attack_type_id,
