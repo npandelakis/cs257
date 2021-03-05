@@ -176,7 +176,7 @@ async function getMapMarkers() {
     var end_year = document.getElementById('end_year');
     var country_code = getCountryCode();
 
-    var url = 'http://localhost:5000/api/countries/' + country_code;
+    var url = getBaseUrl() + 'api/countries/' + country_code;
 
     var data = await fetch(url).then((response) => response.json()).then(data => {return data;});
 
@@ -207,9 +207,13 @@ function getCountryCode() {
 }
 
 async function getCentroid(countryCode) {
-    var url = 'http://localhost:5000/api/centroid/' + countryCode;
+    var url = getBaseUrl() + 'api/centroid/' + countryCode;
     var data = await fetch(url).then((response) => response.json()).then(data => {return data;});
 
 
     return [data[0].longitude, data[0].latitude];
+}
+
+function getBaseUrl() {
+    return window.location.protocol + '//' + window.location.host + '/'
 }
