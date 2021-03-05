@@ -16,11 +16,11 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 app.register_blueprint(api.api, url_prefix='/api')
 
 
-@app.route('/')
+@app.route('/api/help/')
 def help():
     return flask.render_template('help.html')
 
-@app.route('/world')
+@app.route('/')
 def home():
     return flask.render_template('world-map.html')
 
@@ -32,6 +32,13 @@ def country_page(country_code):
 @app.route('/attack/<attack_id>')
 def attack_page(attack_id):
     return flask.render_template('attack_template.html', attack_id = attack_id)
+
+@app.route('/search/<search_text>')
+def search_page(search_text):
+    #if somehow check type of search search_text
+        return flask.render_template('country_template.html')
+    #else:
+        return flask.render_template('perpetrator_template.html')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A tiny Flask application, including API')
