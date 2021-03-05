@@ -27,7 +27,7 @@ def home():
 
 @app.route('/countries/<country_code>')
 def country_page(country_code):
-    return flask.render_template('country_template.html', country_code = country_code)
+    return flask.render_template('country-template.html', country_code = country_code)
 
 @app.route('/attack/<attack_id>')
 def attack_page(attack_id):

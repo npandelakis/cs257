@@ -8,7 +8,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 		<script>
 			let pathScript = document.createElement("script");
-			var path =  '/static/dist/datamaps.' + '{{country_code}}' + '.js';
+			var path =  '/static/maps/datamaps.' + '{{country_code}}' + '.js';
 			pathScript.setAttribute("src", path);
 			document.head.appendChild(pathScript);
 
