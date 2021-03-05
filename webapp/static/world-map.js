@@ -43,7 +43,7 @@ async function getTerrorismData(callback) {
 	var end_year = document.getElementById('end_year')
 	//var url = getAPIBaseURL() + '/world?start_year=' + start_year
 	//	  + '&end_year =' + end_year
-	var url = 'http://localhost:5000/api/world';
+	var url = getAPIBaseUrl() + 'api/world';
 
 	const response = await fetch(url);
 
@@ -63,10 +63,14 @@ function hoverPopupTemplate(geography, data) {
 	return template;
 }
 
-function onCountryClick(geography) {
-//	window.location = getAPIBaseUrl + '/' + geography.properties.name '/';
+function onCountryClick(data) {
+	//This doesn't seem to work on safari...
+
+	window.location = 'countries/' + data.id.toLowerCase();
 }
 
 function getAPIBaseUrl() {
-
+	var getUrl = window.location;
+	var baseUrl = getUrl.protocol + '//' + getUrl.host + '/';
+	return baseUrl;
 }
