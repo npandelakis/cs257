@@ -28,31 +28,58 @@ def connect_to_database():
 
 @api.route('/world/')
 def get_world():
-    start_year = request.args.get('start_year', default = 1960)
-    end_year = request.args.get('end_year', default = 2018)
+    start_year = request.args.get('start_year', default = 1900)
+    end_year = request.args.get('end_year', default = 2021)
     country_dict = get_world_data(start_year, end_year)
     return json.dumps(country_dict)
 
 def get_world_data (start_year,end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
-    #query = "SELECT country_attacks_per_year.country_id, country_attacks_per_year.year, country_attacks_per_year.number_of_attacks, countries.country_name FROM country_attacks_per_year, countries WHERE country_attacks_per_year.country_id = countries.id;"
     query = '''SELECT country_name, country_codes, sum(number_of_attacks)
             FROM country_attacks_per_year AS c JOIN countries ON c.country_id = countries.id
             WHERE countries.id IS NOT NULL AND c.year >= %s  AND c.year <= %s
-            GROUP BY (country_name, country_codes);'''
+            GROUP BY (country_name, country_codes) ORDER BY sum(number_of_attacks) DESC;'''
     cursor.execute(query, (start_year, end_year))
+
+    #Copying colors from NY Times Covid Map
+    color_palette = [
+                    "#f2df91",
+                    "#f9c467",
+                    "#ffa83e",
+                    "#ff8b24",
+                    "#fd6a0b",
+                    "#f04f09",
+                    "#d8382e",
+                    "#c62833",
+                    "#AF1C43",
+                    "#8A1739",
+                    "#701547",
+                    "#4C0D3E"
+                    ]
     country_dict = {}
+
+    #Starting values to assign fillColor
+    index = 11
+    min_number = 22000
     for row in cursor:
-      country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : '#F48FB1'}
+        if int(row[2]) >= min_number:
+            fill_color = color_palette[index]
+        else:
+            index = index - 1
+            min_number = min_number - 2000
+            fill_color = color_palette[index]
+
+
+        country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
     return country_dict
 
 @api.route('/countries/<country_code>')
 def get_country(country_code):
     #Allow for lowercase country codes
     country_code = country_code.upper()
-    start_year = request.args.get('start_year', default = 1960)
-    end_year = request.args.get('end_year', default = 2018)
+    start_year = request.args.get('start_year', default = 1900)
+    end_year = request.args.get('end_year', default = 2021)
     country_ids_tuple = get_country_ids(country_code)
     country_attacks = get_country_attacks(country_ids_tuple, start_year, end_year)
     return json.dumps(country_attacks)
