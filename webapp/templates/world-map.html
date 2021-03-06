@@ -33,6 +33,9 @@
 			  foreach (dbo->query(sql) as row) {
 				  <option value=row[country_code]>
   		</datalist> -->
+		<script>
+		var country = document.getElementById("country").value;
+		</script>
 		<button onclick="location.href= getAPIBaseUrl() + 'countries/' + country" >Go</button>
 		</div>
 		<div id="map-container"></div>
