@@ -36,9 +36,9 @@ def attack_page(attack_id):
 @app.route('/search/<search_text>')
 def search_page(search_text):
     #if somehow check type of search search_text
-        return flask.render_template('country_template.html')
+    return flask.render_template('country_template.html')
     #else:
-        return flask.render_template('perpetrator_template.html')
+        #return flask.render_template('perpetrator_template.html')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A tiny Flask application, including API')
