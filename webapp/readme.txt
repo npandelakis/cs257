@@ -15,3 +15,4 @@ FEATURES NOT YET WORKING:
 - search for perpetrators (not sure if we will be implementing this feature)
 - breadcrumbs
 - flexbox and bootstrap
+- click on pin to take you to attack endpoint
