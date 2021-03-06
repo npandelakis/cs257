@@ -90,3 +90,10 @@ clearIcon.addEventListener("click", () => {
   searchBar.value = "";
   clearIcon.style.visibility = "hidden";
 })
+
+//function search() {
+//    var country = document.getElementById("country").value
+//    var url = getAPIBaseURL() + 'api/search' + country;
+//	const response = await fetch(url);
+//	return response.json();
+//}
