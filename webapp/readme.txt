@@ -8,7 +8,6 @@ FEATURES CURRENTLY WORKING:
 - dynamic coloring for world map based on terrorist attacks
 - country map with pins for each terrorist attack and their summaries
 - search functionality: search for country codes and see country map with attack pins
-- [descriptions]
 
 FEATURES NOT YET WORKING:
 - search functionality that does not require country codes
