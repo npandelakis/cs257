@@ -5,12 +5,14 @@ Each attack has specific data associated with it including location, summary, an
 
 FEATURES CURRENTLY WORKING:
 - world map with data on total number of terrorist attacks in the country
+- dynamic coloring for world map based on terrorist attacks
 - country map with pins for each terrorist attack and their summaries
 - search functionality: search for country codes and see country map with attack pins
 - [descriptions]
 
 FEATURES NOT YET WORKING:
 - search functionality that does not require country codes
+- filter by years
 - search for perpetrators (not sure if we will be implementing this feature)
 - breadcrumbs
 - flexbox and bootstrap
