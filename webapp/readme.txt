@@ -16,3 +16,9 @@ FEATURES NOT YET WORKING:
 - breadcrumbs
 - flexbox and bootstrap
 - click on pin to take you to attack endpoint
+
+
+Before running, set the appropriate values for your database setup into a file called config.py:
+user = ''
+password = ''
+database = ''
