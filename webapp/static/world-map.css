@@ -56,3 +56,13 @@
   border: 1px solid #009688;
   background-color: white;
 }
+
+ul.breadcrumb {
+	padding: 0px;
+	list-style: none;
+}
+
+ul.breadcrumb li {
+	display: inline;
+	font-size: 18px;
+}

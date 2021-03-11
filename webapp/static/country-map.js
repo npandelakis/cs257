@@ -43,6 +43,8 @@ async function initializeMap() {
             popupOnHover: false
         },
         done: function(datamap){
+
+            //Handle and scale the map for zooming
             datamap.svg.call(d3.behavior.zoom().on("zoom", redraw));
             function redraw() {
 
@@ -56,7 +58,6 @@ async function initializeMap() {
                     return markerData.realy - 20/d3.event.scale ;
                 });
                 datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-
             }
         }
     });
@@ -168,8 +169,15 @@ async function initializeMap() {
     const markers = await getMapMarkers();
 
     map.markers(markers, options);
+
+    map.svg.selectAll(".datamaps-marker").on("click", onMarkerClick);
 }
 
+function onMarkerClick(data) {
+    if (drag == false) {
+        window.location = "/countries/" + getCountryCode() + "/" + data.name;
+    }
+}
 
 async function getMapMarkers() {
     var start_year = document.getElementById('start_year');
@@ -233,3 +241,10 @@ clearIcon.addEventListener("click", () => {
   searchBar.value = "";
   clearIcon.style.visibility = "hidden";
 })
+
+
+// differentiate between click and drag for map markers
+let drag = false;
+
+document.addEventListener('mousedown', () => drag = false);
+document.addEventListener('mousemove', () => drag = true);

@@ -64,7 +64,6 @@ function hoverPopupTemplate(geography, data) {
 }
 
 function onCountryClick(data) {
-	//This doesn't seem to work on safari...
 
 	window.location = 'countries/' + data.id.toLowerCase();
 }

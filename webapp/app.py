@@ -11,6 +11,7 @@ import sys
 import argparse
 import flask
 import api
+import psycopg2
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 app.register_blueprint(api.api, url_prefix='/api')
@@ -26,11 +27,16 @@ def home():
 
 @app.route('/countries/<country_code>')
 def country_page(country_code):
-    return flask.render_template('country-template.html', country_code = country_code)
+    country_name = api.get_country_name(country_code)
+    return flask.render_template('country_template.html', country_code = country_code, country_name = country_name)
 
-@app.route('/attack/<attack_id>')
-def attack_page(attack_id):
-    return flask.render_template('attack_template.html', attack_id = attack_id)
+@app.route('/countries/<country_code>/<attack_id>')
+def attack_page(country_code, attack_id):
+    country_name = api.get_country_name(country_code)
+    return flask.render_template('attack_template.html',
+                                 country_name = country_name,
+                                 country_code = country_code,
+                                 attack_id = attack_id)
 
 @app.route('/search/<search_text>')
 def search_page(search_text):
