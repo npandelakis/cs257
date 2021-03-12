@@ -6,10 +6,9 @@
  */
 
 #map-container {
-	position: relative;
 	float: left;
 	height: 0;
-	width: 80%;
+	width: 100%;
 	padding-bottom: 60%;
 	background: DodgerBlue;
 }
@@ -20,10 +19,13 @@
 	padding: 3px;
 }
 
-.wrapper {
+/*.navbarsExampleDefault {
   position: relative;
   display: flex;
+  justify-content: space-between;
   min-width: 100px;
+}*/
+
 }
 
 .search {

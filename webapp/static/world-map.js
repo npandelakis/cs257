@@ -87,25 +87,45 @@ function getAPIBaseUrl() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-	const clearIcon = document.querySelector(".clear-icon");
-	const searchBar = document.querySelector(".search");
+	//const searchBar = document.querySelector("nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.div.container-fluid.div.collapse.navbar-collapse.ul.navbar-nav.me-auto.mb-2.mb-md-0.form.d-flex");
+	//const searchBar = document.querySelector("nav > div.container-fluid > div.collapse.navbar-collapse > ul.navbar-nav.me-auto.mb-2.mb-md-0 > form.d-flex");
 	const button = document.getElementById("search-button");
-
-	searchBar.addEventListener("keyup", () => {
-	  if(searchBar.value && clearIcon.style.visibility != "visible"){
-	    clearIcon.style.visibility = "visible";
-	  } else if(!searchBar.value) {
-	    clearIcon.style.visibility = "hidden";
-	  }
-	});
-
-	clearIcon.addEventListener("click", () => {
-	  searchBar.value = "";
-	  clearIcon.style.visibility = "hidden";
-	});
+	const searchBar = document.getElementById("search_bar");
 
 	button.addEventListener("click", () => {
-		window.location = 'countries/' + searchBar.value;
+		var value = searchBar.value;
+		var value = value.slice(-3);
+		var value = value.toLowerCase();
+		window.location = 'countries/' + value;
 	})
 
-})
+
+	async function getCountryOptions(callback){
+		// Get the <datalist> and <input> elements.
+		var input = document.getElementById("search_bar");
+		var url = getAPIBaseUrl() + '/api/countrynames/' + input.value;
+		const searchResponse = await fetch(url);
+		return searchResponse.text();
+	}
+
+	searchBar.addEventListener("keyup", () =>{
+		if (searchBar.value == ''){}
+		else{datalistOptions();
+		}
+	})
+	async function datalistOptions(){
+		//var datalist_options = JSON.parse(searchResponse);
+		var dataList = document.getElementById("countries");
+		var searchResponse = await getCountryOptions();
+		var searchResponseArray = JSON.parse(searchResponse);
+		searchResponseArray.forEach (function(item) {
+	        // Create a new <option> element.
+	        var option = document.createElement('option');
+	        // Set the value using the item in the JSON array.
+	        option.value = (item.country_name + " " + item.country_code);
+	        // Add the <option> element to the <datalist>.
+	        dataList.appendChild(option);
+		});
+	}
+  })
+
