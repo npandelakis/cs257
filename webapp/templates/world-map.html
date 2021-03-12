@@ -9,7 +9,7 @@
 
 		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='world-map.css')}}">
 		<script type="text/javascript" src="{{url_for('static',filename='world-map.js')}}"></script>
-		<script type="text/javascript" src="{{url_for('static', filename='datamaps.world.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='datamaps.world.js')}}"></script>
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,9 +52,9 @@
 		  </ul>
 		  <ul class="navbar-nav me-auto mb-2 mb-md-0">
 			  <form class="d-flex">
-		        <input class="form-control me-2" type="search" placeholder="Start Year" aria-label="Search">
-		        <input class="form-control me-2" type="search" placeholder="End Year" aria-label="Search">
-		        <button class="btn btn-outline-success" type="submit">Search</button>
+		        <input id="start_year" class="form-control me-2" type="search" placeholder="Start Year" aria-label="Search" value=1960>
+		        <input id="end_year" class="form-control me-2" type="search" placeholder="End Year" aria-label="Search" value=2018>
+		        <button id="filter-button" class="btn btn-outline-success" type="button">Filter</button>
 		      </form>
 		  </ul>
 		    </div>
