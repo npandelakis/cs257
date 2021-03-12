@@ -144,6 +144,20 @@ async function initializeMap() {
       }
   });
 
+    addMarkers(map);
+
+    const filterButton = document.getElementById("filter-button");
+
+    //cleanup and redraw map markers when filtering
+	filterButton.addEventListener("click", async function() {
+        map.svg.selectAll(".datamaps-marker").remove();
+		addMarkers(map);
+	})
+
+}
+
+
+async function addMarkers(map) {
     var options = {
         fillOpacity: 1,
         highlightOnHover: true,
@@ -166,7 +180,7 @@ async function initializeMap() {
         }
     };
 
-    const markers = await getMapMarkers();
+    var markers = await getMapMarkers();
 
     map.markers(markers, options);
 
@@ -184,9 +198,15 @@ async function getMapMarkers() {
     var end_year = document.getElementById('end_year');
     var country_code = getCountryCode();
 
-    var url = getBaseUrl() + 'api/countries/' + country_code;
+    if (start_year.value && end_year.value) {
+		var url = getBaseUrl() + 'api/countries/' + country_code + '?start_year=' + start_year.value
+			  + '&end_year=' + end_year.value;
+	} else {
+		var url = getAPIBaseUrl() + 'api/world';
+	}
 
     var data = await fetch(url).then((response) => response.json()).then(data => {return data;});
+
 
     var mapMarkers = [];
 

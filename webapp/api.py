@@ -70,8 +70,8 @@ def get_world_data (start_year,end_year):
             min_number = min_number - 2000
             fill_color = color_palette[index]
 
-
-        country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
+        if row[1] != '-99':
+            country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
     return country_dict
 
 @api.route('/countries/<country_code>')
@@ -188,6 +188,7 @@ def get_attack_info(attack_id, start_year, end_year):
 
     for row in cursor:
         #return lat and long as strings to preserve precise decimal values
+        #and because JSON doesn't like decimals
         attack_dict = {'id' : int(row[0]),
                         'Year' : int(row[1]),
                         'Month' : int(row[2]),
@@ -219,6 +220,7 @@ def get_attack_info(attack_id, start_year, end_year):
 
 @api.route('/centroid/<country_code>')
 def get_centroid(country_code):
+    #centroid is necessary to center each country map
     country_code = country_code.upper()
     connection  = connect_to_database()
     cursor = connection.cursor()
