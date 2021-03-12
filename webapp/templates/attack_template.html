@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- Written by Nick Pandelakis and Grace de Benedetti -->
+
+<html>
+  <head>
+    <title>Title</title>
+    <script
+    <script>
+      let base = document.createElement("base");
+			basePath = window.location.protocol + '//' + window.location.host + '/';
+			base.setAttribute("href", basePath);
+			document.head.appendChild(base);
+    </script>
+
+    <script src="{{url_for('static', filename='attack.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='attack.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  </head>
+
+  <body>
+      <ul class = "breadcrumb">
+          <li><a href="">World</a></li>
+          <li><a href="/countries/{{ country_code }}">{{ country_name }}</a></li>
+          <li><a>{{ attack_id }}</a></li>
+      </ul>
+  </body>
+</html>

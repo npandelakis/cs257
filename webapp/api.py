@@ -70,8 +70,8 @@ def get_world_data (start_year,end_year):
             min_number = min_number - 2000
             fill_color = color_palette[index]
 
-
-        country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
+        if row[1] != '-99':
+            country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
     return country_dict
 
 @api.route('/countries/<country_code>')
@@ -121,6 +121,20 @@ def get_country_ids(country_code) -> tuple:
     #countries share a country code, like East Germany and West Germany.
     return tuple(country_id_list)
 
+def get_country_name(country_code):
+    country_code = country_code.upper()
+
+    connection = connect_to_database()
+    cursor = connection.cursor()
+    query = '''SELECT country_name FROM countries WHERE country_codes = %s LIMIT 1;'''
+    cursor.execute(query, (country_code,))
+
+    country_name = None
+
+    for row in cursor:
+        country_name = row[0]
+
+    return country_name
 
 @api.route('/attack/<attack_id>')
 def get_attack(attack_id):
@@ -132,70 +146,81 @@ def get_attack(attack_id):
 def get_attack_info(attack_id, start_year, end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
-    query = '''SELECT id,
+    query = '''SELECT attacks.id,
             year,
         	month,
         	day,
-        	country_id,
+        	countries.country_name,
         	province,
         	city,
         	latitude,
         	longitude,
         	location,
         	summary,
-        	attack_type_id,
+        	attack_types.attack_type,
         	success,
         	suicide,
-        	target_type_id,
-        	target_subtype_id,
+        	target_types.target_type,
+        	target_subtypes.target_subtype,
         	target,
         	perp,
         	motive,
-        	weapon_type_id,
-        	weapon_subtype_id,
+        	weapon_types.weapon_type,
+        	weapon_subtypes.weapon_subtype,
         	weapon_detail,
         	number_killed,
         	number_wounded,
-        	property_damage_id
+        	property_damage.damage_extent
             FROM attacks
-            WHERE id in %s
+            LEFT JOIN countries ON attacks.country_id = countries.id
+            LEFT JOIN attack_types ON attacks.attack_type_id = attack_types.id
+            LEFT JOIN target_types ON attacks.target_type_id = target_types.id
+            LEFT JOIN target_subtypes ON attacks.target_subtype_id = target_subtypes.id
+            LEFT JOIN weapon_types ON attacks.weapon_type_id = weapon_types.id
+            LEFT JOIN weapon_subtypes ON attacks.weapon_subtype_id = weapon_subtypes.id
+            LEFT JOIN property_damage ON attacks.property_damage_id = property_damage.id
+            WHERE attacks.id = %s
             AND year >= %s
             And year <= %s;'''
     cursor.execute(query, (attack_id, start_year, end_year))
+
     attack_dict = {}
+
     for row in cursor:
         #return lat and long as strings to preserve precise decimal values
-        attack_dict[row[0]] = {'id' : int(row[0]),
-                                'year' : int(row[1]),
-                                'month' : int(row[2]),
-                                'day' : int(row[3]),
-                                'country_id' : int(row[4]),
-                            	'province' : str(row[5]),
-                            	'city' : str(row[6]),
-                                'latitude' : str(row[4]),
-                                'longitude' : str(row[5]),
-                                'location' : str(row[6]),
-                                'summary' : str(row[7]),
-                                'attack_type_id': int(row[8]),
-                            	'success': int(row[9]),
-                            	'suicide' : int(row[10]),
-                            	'target_type_id' : int(row[11]),
-                            	'target_subtype_id' : int(row[12]),
-                            	'target' : str(row[13]),
-                            	'perp' : str(row[14]),
-                            	'motive' : str(row[15]),
-                            	'weapon_type_id' : int(row[16]),
-                            	'weapon_subtype_id' : int(row[17]),
-                            	'weapon_detail' : str(row[18]),
-                            	'number_killed' : int(row[18]),
-                            	'number_wounded' : int(row[19]),
-                            	'property_damage_id' : int(row[20])}
+        #and because JSON doesn't like decimals
+        attack_dict = {'id' : int(row[0]),
+                        'Year' : int(row[1]),
+                        'Month' : int(row[2]),
+                        'Day' : int(row[3]),
+                        'Country' : str(row[4]),
+                    	'Province/State' : str(row[5]),
+                    	'City' : str(row[6]),
+                        'Latitude' : str(row[7]),
+                        'Longitude' : str(row[8]),
+                        'Location' : str(row[9]),
+                        'summary' : str(row[10]),
+                        'Attack Type': str(row[11]),
+                    	'Success': "Yes" if str(row[12]) == '1' else "No",
+                    	'Suicide' : "Yes" if str(row[13]) == '1' else "No",
+                    	'Target Type' : str(row[14]),
+                    	'Target Subtype' : str(row[15]),
+                    	'Target' : str(row[16]),
+                    	'Perpetrator' : str(row[17]),
+                    	'Motive' : str(row[18]),
+                    	'Weapon Type' : str(row[19]),
+                    	'Weapon Subtype' : str(row[20]),
+                    	'Weapon Detail' : str(row[21]),
+                    	'Number Killed' : str(row[22]),
+                    	'Number Wounded' : str(row[23]),
+                    	'Property Damage Amount' : str(row[24])}
 
     return attack_dict
 
 
 @api.route('/centroid/<country_code>')
 def get_centroid(country_code):
+    #centroid is necessary to center each country map
     country_code = country_code.upper()
     connection  = connect_to_database()
     cursor = connection.cursor()
