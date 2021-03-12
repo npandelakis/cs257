@@ -14,7 +14,7 @@ function initialize() {
 
 async function initializeMap() {
 
-	const mapData = await getTerrorismData();
+	var mapData = await getTerrorismData();
 
 	var map = new Datamap({
 		element: document.getElementById('map-container'),
@@ -31,6 +31,14 @@ async function initializeMap() {
 		}
 
 	});
+
+	const filterButton = document.getElementById("filter-button");
+
+	filterButton.addEventListener("click", async function() {
+		var mapDataNew = await getTerrorismData();
+		console.log(mapDataNew)
+		map.updateChoropleth(mapDataNew);
+	})
 }
 
 function onMapDone(dataMap) {
@@ -41,9 +49,13 @@ function onMapDone(dataMap) {
 async function getTerrorismData(callback) {
 	var start_year = document.getElementById('start_year');
 	var end_year = document.getElementById('end_year')
-	//var url = getAPIBaseURL() + '/world?start_year=' + start_year
-	//	  + '&end_year =' + end_year
-	var url = getAPIBaseUrl() + 'api/world';
+
+	if (start_year.value && end_year.value) {
+		var url = getAPIBaseUrl() + 'api/world?start_year=' + start_year.value
+			  + '&end_year=' + end_year.value
+	} else {
+		var url = getAPIBaseUrl() + 'api/world';
+	}
 
 	const response = await fetch(url);
 
@@ -97,10 +109,3 @@ document.addEventListener("DOMContentLoaded", function() {
 	})
 
 })
-
-//function search() {
-//    var country = document.getElementById("country").value
-//    var url = getAPIBaseURL() + 'api/search' + country;
-//	const response = await fetch(url);
-//	return response.json();
-//}
