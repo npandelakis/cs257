@@ -7,6 +7,7 @@
  */
 
 window.onload = initialize;
+var dataListValues = [];
 
 function initialize() {
 	initializeMap();
@@ -123,9 +124,14 @@ document.addEventListener("DOMContentLoaded", function() {
 	        var option = document.createElement('option');
 	        // Set the value using the item in the JSON array.
 	        option.value = (item.country_name + " " + item.country_code);
+			if (option.value in dataListValues){
+				dataList.removeChild(option);
+			}
+			else{
 	        // Add the <option> element to the <datalist>.
 	        dataList.appendChild(option);
+			dataListValues.push(option.value);
+		}
 		});
 	}
   })
-

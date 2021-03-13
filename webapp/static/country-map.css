@@ -2,7 +2,8 @@
 	position: relative;
 	float: left;
 	height: 0;
-	width: 80%;
+	width: 100%;
+	padding-top : 5%;
 	padding-bottom: 60%;
 	background: #d2b48c;
 }
