@@ -56,6 +56,7 @@
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		  <div class="container-fluid">
 			<a class="navbar-brand" href="/">Home</a>
+			<a class="nav-link" href="/world">World Map</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -76,7 +77,6 @@
 			  </form>
 		  </ul>
 			</div>
-			<a class="nav-link" href="/world">World Map</a>
 		  </div>
 		</nav>
 		<script>
@@ -85,11 +85,11 @@
 		</div>
 		<div id="map-container">
 			<ul class = "breadcrumb">
-				<li><a href="">World</a></li>
+				<li><a href="/world">World</a></li>
 				<li><a>{{ country_name }}</a></li>
 			</ul>
 			<ul class = "title">
-				<a>{{ country_name }}</a>
+				<h1>{{ country_name }}</h1>
 			</ul>
 		</div>
 	</body>
