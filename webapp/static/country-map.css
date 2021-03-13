@@ -2,47 +2,17 @@
 	position: relative;
 	float: left;
 	height: 0;
-	width: 80%;
+	width: 100%;
+	padding-top : 5%;
 	padding-bottom: 60%;
 	background: #d2b48c;
+	line-height: 0.5em;
 }
 
 .hoverpopup {
 	background: #eeeeee;
 	border: 1px black solid;
 	padding: 3px;
-}
-
-.wrapper {
-  position: relative;
-  display: flex;
-  min-width: 100px;
-}
-
-.search {
-  border: 1px solid grey;
-  border-radius: 5px;
-  height: 25px;
-  width: 100%;
-  padding: 2px 23px 2px 30px;
-  outline: 0;
-  background-color: #f5f5f5;
-}
-
-.search-icon {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 14px;
-}
-
-.clear-icon {
-  position: absolute;
-  top: 9px;
-  right: 8px;
-  width: 12px;
-  cursor: pointer;
-  visibility: hidden;
 }
 
 .search:hover, .search:focus {
@@ -57,11 +27,17 @@ ul.breadcrumb {
 
 ul.breadcrumb li {
 	display: inline;
-	font-size: 18px;
+	font-size: 12px;
 }
 
 ul.breadcrumb li+li:before {
   padding: 8px;
   color: black;
   content: "/\00a0";
+}
+
+ul.title {
+	display : flex;
+	font-size: 24px;
+	justify-content: center;
 }

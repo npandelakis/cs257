@@ -16,13 +16,16 @@ import psycopg2
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 app.register_blueprint(api.api, url_prefix='/api')
 
+@app.route('/')
+def home():
+    return flask.render_template('homepage.html')
 
 @app.route('/api/help/')
 def help():
     return flask.render_template('help.html')
 
-@app.route('/')
-def home():
+@app.route('/world')
+def world_page():
     return flask.render_template('world-map.html')
 
 @app.route('/countries/<country_code>')

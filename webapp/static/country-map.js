@@ -7,6 +7,7 @@
  */
 
 window.onload = initialize;
+var dataListValues = [];
 
 function initialize() {
     initializeMap();
@@ -246,21 +247,52 @@ function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
 
-const clearIcon = document.querySelector(".clear-icon");
-const searchBar = document.querySelector(".search");
+document.addEventListener("DOMContentLoaded", function() {
+	const button = document.getElementById("search-button");
+	const searchBar = document.getElementById("search_bar");
 
-searchBar.addEventListener("keyup", () => {
-  if(searchBar.value && clearIcon.style.visibility != "visible"){
-    clearIcon.style.visibility = "visible";
-  } else if(!searchBar.value) {
-    clearIcon.style.visibility = "hidden";
-  }
-});
+	button.addEventListener("click", () => {
+		var value = searchBar.value;
+		var value = value.slice(-3);
+		var value = value.toLowerCase();
+		window.location = 'countries/' + value;
+	})
 
-clearIcon.addEventListener("click", () => {
-  searchBar.value = "";
-  clearIcon.style.visibility = "hidden";
-})
+
+	async function getCountryOptions(callback){
+		// Get the <datalist> and <input> elements.
+		var input = document.getElementById("search_bar");
+		var url = getAPIBaseUrl() + '/api/countrynames/' + input.value;
+		const searchResponse = await fetch(url);
+		return searchResponse.text();
+	}
+
+	searchBar.addEventListener("keyup", () =>{
+		if (searchBar.value == ''){}
+		else{datalistOptions();
+		}
+	})
+	async function datalistOptions(){
+		//var datalist_options = JSON.parse(searchResponse);
+		var dataList = document.getElementById("countries");
+		var searchResponse = await getCountryOptions();
+		var searchResponseArray = JSON.parse(searchResponse);
+		searchResponseArray.forEach (function(item) {
+	        // Create a new <option> element.
+	        var option = document.createElement('option');
+	        // Set the value using the item in the JSON array.
+	        option.value = (item.country_name + " " + item.country_code);
+			if (option.value in dataListValues){
+				dataList.removeChild(option);
+			}
+			else{
+	        // Add the <option> element to the <datalist>.
+	        dataList.appendChild(option);
+			dataListValues.push(option.value);
+		}
+		});
+	}
+  })
 
 
 // differentiate between click and drag for map markers
