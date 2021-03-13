@@ -43,7 +43,17 @@ async function initializeMap() {
 }
 
 function onMapDone(dataMap) {
-	dataMap.svg.selectAll('.datamaps-subunit').on('click', onCountryClick);
+	dataMap.svg.selectAll('.datamaps-subunit')
+	.filter( function(data) {
+			var noCountryClick = ['GRL', 'MNG', '-99', 'PRI', 'OMN', 'GNB','SVK','GUF','ESH','ZWE'];
+
+			if (noCountryClick.includes(data.id)) {
+					return false;
+			} else {
+					return true;
+			}
+	})
+	.on('click', onCountryClick);
 }
 
 
