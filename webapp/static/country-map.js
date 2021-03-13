@@ -7,7 +7,6 @@
  */
 
 window.onload = initialize;
-var dataListValues = [];
 
 function initialize() {
     initializeMap();
@@ -167,10 +166,13 @@ async function addMarkers(map) {
             var summary = '';
             if (data.summary) {
                 summary = data.summary;
-                var template = '<div class = "hoverpopup">'+ summary + '</div>';
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                + summary + '</div>';
                 return template;
             } else {
-                var template = '<div class = "hoverpopup">No Summary Available.</div>';
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                + data.date + '<br>\n'
+                + 'No Summary Available.</div>';
                 return template;
             }
         },
@@ -190,7 +192,7 @@ async function addMarkers(map) {
 
 function onMarkerClick(data) {
     if (drag == false) {
-        window.location = "/countries/" + getCountryCode() + "/" + data.name;
+        window.location = "/countries/" + getCountryCode() + "/" + data.id;
     }
 }
 
@@ -217,7 +219,8 @@ async function getMapMarkers() {
         if (attack.latitude !== "None" && attack.longitude !== "None") {
 
             mapMarkers.push({
-                "name" : attack.id,
+                "id" : attack.id,
+                "date" : attack.month + '/' + attack.day + '/' + attack.year,
                 "radius" : 10,
                 "latitude": attack.latitude,
                 "longitude": attack.longitude,
@@ -247,52 +250,6 @@ function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-	const button = document.getElementById("search-button");
-	const searchBar = document.getElementById("search_bar");
-
-	button.addEventListener("click", () => {
-		var value = searchBar.value;
-		var value = value.slice(-3);
-		var value = value.toLowerCase();
-		window.location = 'countries/' + value;
-	})
-
-
-	async function getCountryOptions(callback){
-		// Get the <datalist> and <input> elements.
-		var input = document.getElementById("search_bar");
-		var url = getAPIBaseUrl() + '/api/countrynames/' + input.value;
-		const searchResponse = await fetch(url);
-		return searchResponse.text();
-	}
-
-	searchBar.addEventListener("keyup", () =>{
-		if (searchBar.value == ''){}
-		else{datalistOptions();
-		}
-	})
-	async function datalistOptions(){
-		//var datalist_options = JSON.parse(searchResponse);
-		var dataList = document.getElementById("countries");
-		var searchResponse = await getCountryOptions();
-		var searchResponseArray = JSON.parse(searchResponse);
-		searchResponseArray.forEach (function(item) {
-	        // Create a new <option> element.
-	        var option = document.createElement('option');
-	        // Set the value using the item in the JSON array.
-	        option.value = (item.country_name + " " + item.country_code);
-			if (option.value in dataListValues){
-				dataList.removeChild(option);
-			}
-			else{
-	        // Add the <option> element to the <datalist>.
-	        dataList.appendChild(option);
-			dataListValues.push(option.value);
-		}
-		});
-	}
-  })
 
 
 // differentiate between click and drag for map markers
