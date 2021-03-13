@@ -166,10 +166,13 @@ async function addMarkers(map) {
             var summary = '';
             if (data.summary) {
                 summary = data.summary;
-                var template = '<div class = "hoverpopup">'+ summary + '</div>';
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                + summary + '</div>';
                 return template;
             } else {
-                var template = '<div class = "hoverpopup">No Summary Available.</div>';
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                + data.date + '<br>\n'
+                + 'No Summary Available.</div>';
                 return template;
             }
         },
@@ -189,7 +192,7 @@ async function addMarkers(map) {
 
 function onMarkerClick(data) {
     if (drag == false) {
-        window.location = "/countries/" + getCountryCode() + "/" + data.name;
+        window.location = "/countries/" + getCountryCode() + "/" + data.id;
     }
 }
 
@@ -216,7 +219,8 @@ async function getMapMarkers() {
         if (attack.latitude !== "None" && attack.longitude !== "None") {
 
             mapMarkers.push({
-                "name" : attack.id,
+                "id" : attack.id,
+                "date" : attack.month + '/' + attack.day + '/' + attack.year,
                 "radius" : 10,
                 "latitude": attack.latitude,
                 "longitude": attack.longitude,
@@ -245,6 +249,7 @@ async function getCentroid(countryCode) {
 function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
+
 
 function getAPIBaseUrl() {
 	var getUrl = window.location;
