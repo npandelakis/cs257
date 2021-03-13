@@ -110,6 +110,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	searchBar.addEventListener("keyup", () =>{
+		var dataList = document.getElementById("countries");
+        dataList.innerHTML = '';
 		if (searchBar.value == ''){}
 		else{datalistOptions();
 		}

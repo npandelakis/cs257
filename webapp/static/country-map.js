@@ -7,7 +7,6 @@
  */
 
 window.onload = initialize;
-var dataListValues = [];
 
 function initialize() {
     initializeMap();
@@ -247,6 +246,12 @@ function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
 
+function getAPIBaseUrl() {
+	var getUrl = window.location;
+	var baseUrl = getUrl.protocol + '//' + getUrl.host + '/';
+	return baseUrl;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 	const button = document.getElementById("search-button");
 	const searchBar = document.getElementById("search_bar");
@@ -268,6 +273,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	searchBar.addEventListener("keyup", () =>{
+        var dataList = document.getElementById("countries");
+        dataList.innerHTML = '';
 		if (searchBar.value == ''){}
 		else{datalistOptions();
 		}
@@ -282,14 +289,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	        var option = document.createElement('option');
 	        // Set the value using the item in the JSON array.
 	        option.value = (item.country_name + " " + item.country_code);
-			if (option.value in dataListValues){
-				dataList.removeChild(option);
-			}
-			else{
 	        // Add the <option> element to the <datalist>.
 	        dataList.appendChild(option);
-			dataListValues.push(option.value);
-		}
 		});
 	}
   })
