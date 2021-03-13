@@ -6,8 +6,8 @@
 	padding-top : 5%;
 	padding-bottom: 60%;
 	background: #d2b48c;
-	line-height: 0.5em;
 }
+
 
 .hoverpopup {
 	background: #eeeeee;
@@ -36,8 +36,11 @@ ul.breadcrumb li+li:before {
   content: "/\00a0";
 }
 
-ul.title {
+/*.title {
 	display : flex;
-	font-size: 24px;
+	font-size: 18px;
 	justify-content: center;
+	margin-bottom: -6px;
+	margin-top: -12px;
+	color: white;
 }

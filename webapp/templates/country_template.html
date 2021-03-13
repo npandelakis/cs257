@@ -3,7 +3,7 @@
 
 <html>
 	<head>
-		<title>{{ Title }}</title>
+		<title>{{ country_name }} Terrorism Map</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 		<script>
@@ -52,10 +52,10 @@
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		  <div class="container-fluid">
 			<a class="navbar-brand" href="/">Home</a>
+			<a class="nav-link" href="/world">World Map</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			  <span class="navbar-toggler-icon"></span>
 			</button>
@@ -68,28 +68,23 @@
 				<button class="btn btn-outline-success" type = "reset" id = "search-button" >Search</button>
 			  </form>
 		  </ul>
-		  <ul class="navbar-nav me-auto mb-2 mb-md-0">
+		  <a class= "navbar-brand" >{{ country_name }}</a>
 			  <form class="d-flex">
 				<input id="start_year" class="form-control me-2" type="search" placeholder="Start Year" aria-label="Search" value=1960>
 				<input id="end_year" class="form-control me-2" type="search" placeholder="End Year" aria-label="Search" value=2018>
 				<button id="filter-button" class="btn btn-outline-success" type="button">Filter</button>
 			  </form>
-		  </ul>
 			</div>
-			<a class="nav-link" href="/world">World Map</a>
 		  </div>
-		</nav>
+	  	</nav>
 		<script>
 			var search_bar = document.getElementById("search_bar").value;
 		</script>
 		</div>
 		<div id="map-container">
 			<ul class = "breadcrumb">
-				<li><a href="">World</a></li>
+				<li><a href="/world">World</a></li>
 				<li><a>{{ country_name }}</a></li>
-			</ul>
-			<ul class = "title">
-				<a>{{ country_name }}</a>
 			</ul>
 		</div>
 	</body>
