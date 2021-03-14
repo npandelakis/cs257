@@ -84,7 +84,6 @@ function hoverPopupTemplate(geography, data) {
 	if (NO_COUNTRY_CLICK.includes(geography.id)) {
 			var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '(' + geography.id + ')' + '</strong><br>\n'
 							+ '<strong>Terrorist Attacks: </strong>' + attacks + '<br>\n'
-							+ 'Click to Learn More!' + '<br>\n' + '</div>';
 
 	} else {
 			var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '(' + geography.id + ')' + '</strong><br>\n'
