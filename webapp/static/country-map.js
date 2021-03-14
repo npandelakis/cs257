@@ -168,11 +168,11 @@ async function addMarkers(map) {
             var summary = '';
             if (data.summary) {
                 summary = data.summary;
-                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong> (Click to learn more!)<br>\n'
                 + summary + '</div>';
                 return template;
             } else {
-                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong><br>\n'
+                var template = '<div class = "hoverpopup"><strong>Attack ' + data.id +'</strong> (Click to learn more!) <br>\n'
                 + data.date + '<br>\n'
                 + 'No Summary Available.</div>';
                 return template;

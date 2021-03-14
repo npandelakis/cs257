@@ -9,6 +9,8 @@
 window.onload = initialize;
 var dataListValues = [];
 
+const NO_COUNTRY_CLICK = ['GRL', 'MNG', '-99', 'PRI', 'OMN', 'GNB','SVK','GUF','ESH','ZWE'];
+
 function initialize() {
 	initializeMap();
 }
@@ -45,9 +47,8 @@ async function initializeMap() {
 function onMapDone(dataMap) {
 	dataMap.svg.selectAll('.datamaps-subunit')
 	.filter( function(data) {
-			var noCountryClick = ['GRL', 'MNG', '-99', 'PRI', 'OMN', 'GNB','SVK','GUF','ESH','ZWE'];
 
-			if (noCountryClick.includes(data.id)) {
+			if (NO_COUNTRY_CLICK.includes(data.id)) {
 					return false;
 			} else {
 					return true;
@@ -80,8 +81,14 @@ function hoverPopupTemplate(geography, data) {
 		attacks = data.number_of_attacks;
 	}
 
-	var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '</strong><br>\n'
-					+ '<strong>Terrorist Attacks: </strong>' + attacks + '<br>\n' + '</div>';
+	if (NO_COUNTRY_CLICK.includes(geography.id)) {
+			var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '(' + geography.id + ')' + '</strong><br>\n'
+							+ '<strong>Terrorist Attacks: </strong>' + attacks + '<br>\n';
+	} else {
+			var template = '<div class = "hoverpopup"><strong>' + geography.properties.name + '(' + geography.id + ')' + '</strong><br>\n'
+							+ '<strong>Terrorist Attacks: </strong>' + attacks + '<br>\n'
+							+ 'Click to Learn More!' + '<br>\n' + '</div>';
+	}
 
 	return template;
 }

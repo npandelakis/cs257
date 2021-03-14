@@ -36,10 +36,10 @@ def get_world():
 def get_world_data (start_year,end_year):
     connection = connect_to_database()
     cursor = connection.cursor()
-    query = '''SELECT country_name, country_codes, sum(number_of_attacks)
+    query = '''SELECT country_codes, sum(number_of_attacks)
             FROM country_attacks_per_year AS c JOIN countries ON c.country_id = countries.id
             WHERE countries.id IS NOT NULL AND c.year >= %s  AND c.year <= %s
-            GROUP BY (country_name, country_codes) ORDER BY sum(number_of_attacks) DESC;'''
+            GROUP BY (country_codes) ORDER BY sum(number_of_attacks) DESC;'''
     cursor.execute(query, (start_year, end_year))
 
     #Copying colors from NY Times Covid Map
@@ -63,15 +63,15 @@ def get_world_data (start_year,end_year):
     index = 11
     min_number = 22000
     for row in cursor:
-        if int(row[2]) >= min_number:
+        if int(row[1]) >= min_number:
             fill_color = color_palette[index]
         else:
             index = index - 1
             min_number = min_number - 2000
             fill_color = color_palette[index]
 
-        if row[1] != '-99':
-            country_dict[row[1]] = {'country_name' : row[0], 'country_code' : row[1], 'number_of_attacks' : int(row[2]), 'fillColor' : fill_color}
+        if row[0] != '-99':
+            country_dict[row[0]] = {'country_code' : row[0], 'number_of_attacks' : int(row[1]), 'fillColor' : fill_color}
     return country_dict
 
 @api.route('/countries/<country_code>')
