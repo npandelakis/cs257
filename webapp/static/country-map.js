@@ -57,7 +57,9 @@ async function initializeMap() {
                 .attr("y", function(markerData) {
                     return markerData.realy - 20/d3.event.scale ;
                 });
-                datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+                datamap.svg.selectAll("g")
+                .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
         }
     });
@@ -249,7 +251,6 @@ async function getCentroid(countryCode) {
 function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
-
 
 function getAPIBaseUrl() {
 	var getUrl = window.location;
