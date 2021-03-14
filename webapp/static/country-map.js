@@ -57,7 +57,9 @@ async function initializeMap() {
                 .attr("y", function(markerData) {
                     return markerData.realy - 20/d3.event.scale ;
                 });
-                datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+                datamap.svg.selectAll("g")
+                .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
         }
     });
@@ -251,11 +253,6 @@ function getBaseUrl() {
 }
 
 
-function getAPIBaseUrl() {
-	var getUrl = window.location;
-	var baseUrl = getUrl.protocol + '//' + getUrl.host + '/';
-	return baseUrl;
-}
 
 document.addEventListener("DOMContentLoaded", function() {
 	const button = document.getElementById("search-button");
