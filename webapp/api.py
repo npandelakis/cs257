@@ -245,14 +245,17 @@ def get_area(search_text):
 
 @api.route('/countrynames/<search_text>')
 def get_countries(search_text):
+    search_text = search_text.lower()
     upper_search_text = search_text.upper()
+    country_name_search_text = search_text[0].upper() + search_text[1:]
     connection  = connect_to_database()
     cursor = connection.cursor()
     code_search_text = '%' + upper_search_text + '%'
-    name_search_text = '%' + search_text + '%'
+    name_search_text = '%' + country_name_search_text + '%'
     query = '''SELECT country_name, country_codes FROM countries WHERE country_name LIKE %s OR country_codes LIKE %s LIMIT 15;'''
     cursor.execute(query, (name_search_text, code_search_text))
     country_options = []
     for row in cursor:
+        #countryName = row[0]
         country_options.append({"country_name" : row[0], "country_code" : row[1]})
     return json.dumps(country_options)
