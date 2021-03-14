@@ -252,7 +252,11 @@ function getBaseUrl() {
     return window.location.protocol + '//' + window.location.host + '/'
 }
 
-
+function getAPIBaseUrl() {
+	var getUrl = window.location;
+	var baseUrl = getUrl.protocol + '//' + getUrl.host + '/';
+	return baseUrl;
+}
 
 document.addEventListener("DOMContentLoaded", function() {
 	const button = document.getElementById("search-button");
