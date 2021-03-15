@@ -301,6 +301,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
   })
 
+document.getElementById('overlay').addEventListener("wheel", () => {
+    document.getElementById('overlay').remove();
+})
 
 // differentiate between click and drag for map markers
 let drag = false;

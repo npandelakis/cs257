@@ -9,7 +9,7 @@
 window.onload = initialize;
 var dataListValues = [];
 
-const NO_COUNTRY_CLICK = ['GRL', 'MNG', '-99', 'PRI', 'OMN', 'GNB','SVK','GUF','ESH','ZWE'];
+const NO_COUNTRY_CLICK = ['GRL', 'MNG', '-99', 'PRI', 'OMN', 'GNB','SVK','GUF','ESH','ZWE','RUS','COD','COG'];
 
 function initialize() {
 	initializeMap();
