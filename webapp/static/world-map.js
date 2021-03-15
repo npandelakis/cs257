@@ -105,6 +105,7 @@ function getAPIBaseUrl() {
 	return baseUrl;
 }
 
+//search
 document.addEventListener("DOMContentLoaded", function() {
 	//const searchBar = document.querySelector("nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top.div.container-fluid.div.collapse.navbar-collapse.ul.navbar-nav.me-auto.mb-2.mb-md-0.form.d-flex");
 	//const searchBar = document.querySelector("nav > div.container-fluid > div.collapse.navbar-collapse > ul.navbar-nav.me-auto.mb-2.mb-md-0 > form.d-flex");

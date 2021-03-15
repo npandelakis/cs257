@@ -1,3 +1,11 @@
+/* attack.js
+ *
+ * Javascript to query the /api/attack/<attack_id> endpoint
+ * and display data on given attack.
+ *
+ * Written by Nick Pandelakis and Grace de Benedetti
+ */
+
 window.onload = initialize;
 
 function initialize() {
@@ -56,6 +64,7 @@ function getAttackId() {
     return pathname.split('/').pop();
 }
 
+//search
 document.addEventListener("DOMContentLoaded", function() {
 	const button = document.getElementById("search-button");
 	const searchBar = document.getElementById("search_bar");

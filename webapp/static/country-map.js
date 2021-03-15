@@ -258,6 +258,7 @@ function getAPIBaseUrl() {
 	return baseUrl;
 }
 
+//search
 document.addEventListener("DOMContentLoaded", function() {
 	const button = document.getElementById("search-button");
 	const searchBar = document.getElementById("search_bar");
