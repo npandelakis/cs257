@@ -9,6 +9,10 @@ body {
 	overflow: hidden;
 }
 
+#title {
+	color: #FFF;
+}
+
 #overlay {
 	position: absolute;
 	background-color: rgba(0,0,0,0.65);
