@@ -68,12 +68,3 @@ ul.breadcrumb li+li:before {
   color: black;
   content: "/\00a0";
 }
-
-/*.title {
-	display : flex;
-	font-size: 18px;
-	justify-content: center;
-	margin-bottom: -6px;
-	margin-top: -12px;
-	color: white;
-}
